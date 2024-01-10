@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=640, initial-scale=1.0">
+    <title>宋韵卿裳街景</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .jj{
+            position: fixed;
+            /* position: absolute; */
+            top: 50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            width: 640px;
+            /* width: 640px; */
+            height: 100%;
+            border: 1px solid black;
+            overflow: auto;
+            /* overflow-x: hidden; */
+        }
+
+        #qhbtn{
+            height:100vh;
+            max-height: 100%;
+            width: auto;
+            
+            position: fixed;
+            left:0px;
+            z-index: 12;
+            
+        }
+
+        /* 背景部分 */
+        .bg{
+            height: 100vh;
+            max-height: 100%;
+            width: auto;
+            display: flex;
+            position: relative;
+            /* cursor: grab;
+            overflow-x: hidden;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch; */
+        }
+        .bgImg{
+            height: 100%;
+            top: 0;
+            left: 0;
+            /* width: 62.1%; */
+            /* 2667*4292 */
+            position: absolute;
+            z-index: 1;
+        }
+
+        /* 切换按钮 */
+        .changeBtnBox{
+            height:100vh;
+            max-height: 100%;
+            width: auto;
+            display: flex;
+            position: absolute;
+            left: 0;
+        }
+        #jjbtn{
+            display: block;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+            z-index: 0;
+        }
+        .changeBtn{
+            position: fixed;
+            z-index: 15;
+            width: 10%;
+            top: 77.8%;
+        }
+        #leftClickBtn{
+            left: 9%;
+        }
+        #rightClickBtn{
+            right: 9%;
+        }
+        /* 服装店，第一层 */
+        .clothingShopBox{
+            height:100vh;
+            max-height: 100%;
+            width: auto;
+            display: flex;
+            position: absolute;
+            left: 0;
+        }
+        .clothingShopImg{
+            display: block;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+            z-index: 10;
+        }
+        .clothingShopBtn{
+            display: block;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+            z-index: 10;
+        }
+        .clothingShopWord{
+            display: block;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+            z-index: 10;
+        }
+        .clothingShopTips{
+            display: block;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+            z-index: 10;
+        }
+        .clothingShopBtn2{
+            display: block;
+            height: 11%;
+            top: 64.7%;
+            left: 155%;
+            position: relative;
+            z-index: 12;
+            opacity: 0.6;
+            transform: transform 0.3s ease-in-out;
+        }
+        #light1{
+            display: block;
+            width: 100%;
+            height: 11%;
+            top: 53.7%;
+            left: 155%;
+            position: relative;
+            z-index: 11;
+            border-radius: 50px;
+            border: 5px solid yellow;
+            /* animation:light 1s ease infinite; */
+        }
+
+        /* 首饰店，第二层 */
+        .jewelryShopBox{
+            height:100vh;
+            max-height: 100%;
+            width: auto;
+            display: flex;
+            position: absolute;
+            right: 0;
+        }
+        .jewelryShopImg{
+            display: block;
+            height: 100%;
+            top: 0;
+            position: absolute;
+            z-index: 7;
+        }
+        .jewelryShopBtn{
+            display: block;
+            height: 100%;
+            top: 0;
+            right: 0;
+            position: absolute;
+            z-index: 7;
+        }
+        .jewelryShopWord{
+            display: block;
+            height: 100%;
+            top: 0;
+            right: 0;
+            position: absolute;
+            z-index: 7;
+        }
+        .jewelryShopTips{
+            display: block;
+            height: 100%;
+            top: 0;
+            right: 0;
+            position: absolute;
+            z-index: 7;
+        }
+        .jewelryShopBtn2{
+            display: block;
+            height: 11%;
+            top: 64.5%;
+            left: 359%;
+            position: relative;
+            z-index: 12;
+            opacity: 0.6;
+            transform: transform 0.3s ease-in-out;
+        }
+        #light2{
+            display: block;
+            width: 100%;
+            height: 11%;
+            top: 53.5%;
+            left: 358%;
+            position: relative;
+            z-index: 11;
+            border-radius: 50px;
+            border: 5px solid rgb(0, 13, 255);
+            /* animation:light 1s ease infinite; */
+        }
+
+        /* 发型店，第三层 */
+        .hairShopBox{
+            height:90%;
+            max-height: 100%;
+            width: auto;
+            left: 10%;
+            display: flex;
+            position: absolute;
+            right: 0;
+        }
+        .hairShopImg{
+            display: block;
+            height: 100%;
+            top: 0;
+            position: absolute;
+            z-index: 4;
+        }
+        .hairShopBtn{
+            display: block;
+            height: 100%;
+            top: 0;
+            right: 0;
+            position: absolute;
+            z-index: 4;
+        }
+        .hairShopWord{
+            display: block;
+            height: 100%;
+            top: 0;
+            right: 0;
+            position: absolute;
+            z-index: 4;
+        }
+        .hairShopTips{
+            display: block;
+            height: 100%;
+            top: 0;
+            right: 0;
+            position: absolute;
+            z-index: 4;
+        }
+        .hairShopBtn2{
+            display: block;
+            height: 11%;
+            top: 61.5%;
+            left: 111.5%;
+            position: relative;
+            z-index: 12;
+            opacity: 0.6;
+            transform: transform 0.3s ease-in-out;
+        }
+        #light3{
+            display: block;
+            width: 100%;
+            height: 11%;
+            top: 50.5%;
+            left: 110%;
+            position: relative;
+            z-index: 11;
+            border-radius: 50px;
+            border: 5px solid rgb(0, 255, 68);
+            /* animation:light 1s ease infinite; */
+        }
+
+        /* 衣帽间，第四层 */
+        .cloakroomBox{
+            height:88%;
+            max-height: 100%;
+            width: auto;            
+            left: 60%;
+            display: flex;
+            position: absolute;
+            right: 0;
+        }
+        .cloakroomImg{
+            display: block;
+            height: 100%;
+            top: 0;
+            position: absolute;
+            z-index: 2;
+        }
+        .cloakroomBtn{
+            display: block;
+            height: 100%;
+            top: 0;
+            right: 0;
+            position: absolute;
+            z-index: 2;
+        }
+        .cloakroomWord{
+            display: block;
+            height: 100%;
+            top: 0;
+            right: 0;
+            position: absolute;
+            z-index: 2;
+        }
+        .cloakroomTips{
+            display: block;
+            height: 100%;
+            top: 0;
+            right: 0;
+            position: absolute;
+            z-index: 2;
+        }
+        .cloakroomBtn2{
+            display: block;
+            height: 11%;
+            top: 65.7%;
+            left: 301%;
+            position: relative;
+            z-index: 12;
+            opacity: 0.6;
+            transform: transform 0.3s ease-in-out;
+        }
+        #light4{
+            display: block;
+            width: 100%;
+            height: 11%;
+            top: 54.8%;
+            left: 301%;
+            position: relative;
+            z-index: 11;
+            border-radius: 50px;
+            border: 5px solid rgb(255, 0, 174);
+            /* animation:light 1s ease infinite; */
+        }
+
+        /* @keyframes light {
+            0%{opacity: 0}
+            50%{opacity: 1}
+            100%{opacity: 0}
+        } */
+    </style>
+    <script type="text/javascript">
+        var index=0;
+        window.onload=function(){
+            document.getElementById("leftClickBtn").onclick=function(){
+                index--;
+                if(index<0){
+                    index=0;
+                }
+                document.getElementById("bgbox").style.left=-(index*420)+"px";
+            }
+            document.getElementById("rightClickBtn").onclick=function(){
+                index++;
+                if(index>4){
+                    index=4;
+                }
+                document.getElementById("view_box").style.left=-(index*420)+"px";
+            }
+        }
+    </script>
+    <!-- <script type="text/javascript">
+        window.onload = function(){
+            light()
+        }
+        function light(){
+            var l = document.getElementById('light1');
+            l.style.animation = "light 0.5s ease infinite";
+        }
+    </script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- light1 -->
+    <script>
+        $(document).ready(function() {
+            var light1 = $('#light1');
+    
+            light1.css({
+                'animation': 'light 1s ease infinite',
+                'opacity': '0'
+            });
+    
+            function toggleOpacity() {
+                light1.animate({ 'opacity': '1' }, 500, function() {
+                    light1.animate({ 'opacity': '0' }, 500, toggleOpacity);
+                });
+            }
+    
+            toggleOpacity();
+        });
+    </script>
+    <!-- light2 -->
+    <script>
+        $(document).ready(function() {
+            var light2 = $('#light2');
+    
+            light2.css({
+                'animation': 'light 1s ease infinite',
+                'opacity': '0'
+            });
+    
+            function toggleOpacity() {
+                light2.animate({ 'opacity': '1' }, 500, function() {
+                    light2.animate({ 'opacity': '0' }, 500, toggleOpacity);
+                });
+            }
+    
+            toggleOpacity();
+        });
+    </script>
+    <!-- light3 -->
+    <script>
+        $(document).ready(function() {
+            var light3 = $('#light3');
+    
+            light3.css({
+                'animation': 'light 1s ease infinite',
+                'opacity': '0'
+            });
+    
+            function toggleOpacity() {
+                light3.animate({ 'opacity': '1' }, 500, function() {
+                    light3.animate({ 'opacity': '0' }, 500, toggleOpacity);
+                });
+            }
+    
+            toggleOpacity();
+        });
+    </script>
+    <!-- light4 -->
+    <script>
+        $(document).ready(function() {
+            var light4 = $('#light4');
+    
+            light4.css({
+                'animation': 'light 1s ease infinite',
+                'opacity': '0'
+            });
+    
+            function toggleOpacity() {
+                light4.animate({ 'opacity': '1' }, 500, function() {
+                    light4.animate({ 'opacity': '0' }, 500, toggleOpacity);
+                });
+            }
+    
+            toggleOpacity();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="jj">
+        <!-- 切换按钮 -->
+        <!-- <div class="changeBtnBox">
+            <img src="./image/jjbtn.png" id="jjbtn">
+            <img src="./image/leftClickBtn.png" class="changeBtn" id="leftClickBtn">
+            <img src="./image/rightClickBtn.png" class="changeBtn" id="rightClickBtn">
+
+            <script type="text/javascript">
+                window.addEventListener('load',function(){
+                    var bgtp = document.getElementById('jjbtn');//获取图片元素
+                    var bgbox = jjbtn.parentNode;//获取盒子元素
+                    var bgtpWidth = jjbtn.width;//获取图片宽度
+                    bgbox.style.width=bgtpWidth+'px';
+                });
+            </script>
+        </div> -->
+
+        <!-- 背景 -->
+        <div class="bg" id="bgbox">
+            <img src="./image/bgImg.jpg" alt="背景" class="bgImg" id="bgImg">            
+            <script type="text/javascript">
+                window.addEventListener('load',function(){
+                    var bgtp = document.getElementById('bgImg');//获取图片元素
+                    var bgbox = bgtp.parentNode;//获取盒子元素
+                    var bgtpWidth = bgtp.width;//获取图片宽度
+                    bgbox.style.width=bgtpWidth+'px';
+                });
+            </script>
+            <!-- <script>
+                $(window).on('load',function(){
+                    var bgtp = $('#bgImg'); // 获取图片元素
+                    var bgbox = bgtp.parent(); // 获取盒子元素
+                    var bgtpWidth = bgtp.width(); // 获取图片宽度
+                    bgbox.css('width', bgtpWidth + 'px');
+                });
+            </script> -->
+
+            
+            <!-- 服装店部分（第一层） -->
+            <div class="clothingShopBox" id="clothingShopBox"> 
+                <!-- 背景部分 -->
+                <img src="./image/clothingShop.png" alt="服装店" class="clothingShopImg" id="clothingShopImg">
+                <img src="./image/clothingShopBtn.png" alt="点击进入服装店" class="clothingShopBtn">
+                <img src="./image/clothingShopWord.png" alt="华服轩·服装店" class="clothingShopWord">
+                <img src="./image/clothingShopTips.png" alt="服装店提示" class="clothingShopTips">
+                <!-- 按钮部分 -->
+                <a href="Clothing stores.html" id="clothingShopLink">
+                    <img src="./image/clickBtnMin.png" alt="点击进入服装店" class="clothingShopBtn2" id="clothingShopBtn2">
+                    <div id="light1"></div>
+                </a>
+            </div>
+
+            <script type="text/javascript">
+                window.addEventListener('load',function(){
+                    var fzdimg = document.getElementById('clothingShopImg');//获取图片元素
+                    var fzdbox = clothingShopImg.parentNode;//获取盒子元素
+                    var fzdWidth = clothingShopImg.width;//获取图片宽度
+                    fzdbox.style.width=fzdWidth+'px';
+                });
+            </script>
+    
+            <!-- 首饰店部分（第二层） -->
+            <div class="jewelryShopBox">
+                <!-- 背景部分 -->
+                <img src="./image/jewelryShop.png" alt="首饰店" class="jewelryShopImg" id="jewelryShopImg">
+                <img src="./image/jewelryShopBtn.png" alt="点击进入首饰店" class="jewelryShopBtn">
+                <img src="./image/jewelryShopWord.png" alt="白玉堂·首饰店" class="jewelryShopWord">
+                <img src="./image/jewelryShopTips.png" alt="首饰店提示" class="jewelryShopTips">
+                <!-- 按钮部分 -->
+                <a href="Jewelry stores.html" id="jewelryShopLink">
+                    <img src="./image/clickBtnMin.png" alt="点击进入首饰店" class="jewelryShopBtn2" id="jewelryShopBtn2">
+                    <div id="light2"></div>
+                </a>
+            </div>
+
+            <script type="text/javascript">
+                window.addEventListener('load',function(){
+                    var ssdimg = document.getElementById('jewelryShopImg');//获取图片元素
+                    var ssdbox = jewelryShopImg.parentNode;//获取盒子元素
+                    var ssdWidth = jewelryShopImg.width;//获取图片宽度
+                    ssdbox.style.width=ssdWidth+'px';
+                });
+            </script>
+    
+            <!-- 发型店部分（第三层） -->
+            <div class="hairShopBox">
+                <!-- 背景部分 -->
+                <img src="./image/hairShop.png" alt="发型店" class="hairShopImg" id="hairShopImg">
+                <img src="./image/hairShopBtn.png" alt="点击进入发型店" class="hairShopBtn">
+                <img src="./image/hairShopWord.png" alt="青丝坊·发型店" class="hairShopWord">
+                <img src="./image/hairShopTips.png" alt="发型店提示" class="hairShopTips">
+                <!-- 按钮部分 -->
+                <a href="Hair.html" id="hairShopLink">
+                    <img src="./image/clickBtnMin.png" alt="点击进入发型店" class="hairShopBtn2" id="hairShopBtn2">
+                    <div id="light3"></div>
+                </a>
+            </div>
+
+            <script type="text/javascript">
+                window.addEventListener('load',function(){
+                    var fxdimg = document.getElementById('hairShopImg');//获取图片元素
+                    var fxdbox = hairShopImg.parentNode;//获取盒子元素
+                    var fxdWidth = hairShopImg.width;//获取图片宽度
+                    fxdbox.style.width=fxdWidth+'px';
+                });
+            </script>
+    
+            <!-- 衣帽间部分（第四层） -->
+            <div class="cloakroomBox">
+                <!-- 背景部分 -->
+                <img src="./image/cloakroom.png" alt="衣帽间" class="cloakroomImg" id="cloakroomImg">
+                <img src="./image/cloakroomBtn.png" alt="点击进入衣帽间" class="cloakroomBtn">
+                <img src="./image/cloakroomWord.png" alt="衣帽间" class="cloakroomWord">
+                <img src="./image/cloakroomTips.png" alt="衣帽间提示" class="cloakroomTips">
+                <a href="Cloakroom.html" id="cloakroomLink">
+                    <img src="./image/clickBtnMin.png" alt="点击进入衣帽间" class="cloakroomBtn2" id="cloakroomBtn2">
+                    <div id="light4"></div>
+                </a>
+            </div>
+
+            <script type="text/javascript">
+                window.addEventListener('load',function(){
+                    var ymjimg = document.getElementById('cloakroomImg');//获取图片元素
+                    var ymjbox = cloakroomImg.parentNode;//获取盒子元素
+                    var ymjWidth = cloakroomImg.width;//获取图片宽度
+                    ymjbox.style.width=ymjWidth+'px';
+                });
+            </script>
+        </div>
+    </div>
+</body>
+</html>
