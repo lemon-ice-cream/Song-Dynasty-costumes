@@ -263,11 +263,11 @@
             <img class="window" src="./material/店铺素材1.png">
             <div class="Frame">
                 <div class="frame" id="scrollable-div" onmousedown="startDragging(event)" onmouseup="stopDragging()" onmouseleave="stopDragging()" onmousemove="drag(event)" ontouchstart="startDragging(event)" ontouchend="stopDragging()" ontouchmove="drag(event)">
-                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/Hairstyle/头饰 双丫髻.png">
-                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/Hairstyle/头饰 双盘髻.png">
-                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/Hairstyle/头饰 堕马髻.png">
-                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/Hairstyle/头饰 朝天髻.png">
-                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/Hairstyle/头饰 盘龙髻.png">
+                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/hairstyle/头饰 双丫髻.png">
+                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/hairstyle/头饰 双盘髻.png">
+                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/hairstyle/头饰 堕马髻.png">
+                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/hairstyle/头饰 朝天髻.png">
+                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/hairstyle/头饰 盘龙髻.png">
                 </div>
             </div>
 
@@ -279,7 +279,8 @@
     <script>
         $(document).ready(function() {
             const people = localStorage.getItem("person");
-            if (people === null || people === "" || /\s/.test(person)){
+			var whitespaceRegex = /^\s*$/;
+			if (people === null || people === "" || whitespaceRegex.test(people)){
             	$("#err_div").css("display","block");
             	$("#err").css("display","block");
             }
@@ -328,7 +329,7 @@
             var hairElements = document.getElementsByClassName("hair");
             for (var i = 0; i < hairElements.length; i++) {
                 if(a==hairElements[i]){
-                    document.getElementById("head").src = "./material/cloakroom/Hairstyle/hair" + i + ".png";
+                    document.getElementById("head").src = "./material/cloakroom/hairstyle/hair" + i + ".png";
                 }
             }
         }

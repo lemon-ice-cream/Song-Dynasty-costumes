@@ -326,14 +326,15 @@
 		}
 		
 		function save(){
-			const people = localStorage.getItem('people');
-			if (people === null || people === "" || /\s/.test(people)){
+			const people = localStorage.getItem('person');
+			var whitespaceRegex = /^\s*$/;
+			if (people === null || people === "" || whitespaceRegex.test(people)){
 				$("#err_div").css("display","block");
 				$("#err").css("display","block");
 			}
 			else{
 				$("#end_person").html(people);
-				$("#cover_people").html($("#end_person").html());
+				$("#cover_people").html(people);
 				$("#cover_people #pibo").attr("id","pibo_cover");
 			}
 			const id = localStorage.getItem('name');

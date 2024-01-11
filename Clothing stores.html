@@ -432,7 +432,8 @@
     <script>
         $(document).ready(function() {
             const people = localStorage.getItem("person");
-            if (people === null || people === "" || /\s/.test(person)){
+            var whitespaceRegex = /^\s*$/;
+            if (people === null || people === "" || whitespaceRegex.test(people)){
             	$("#err_div").css("display","block");
             	$("#err").css("display","block");
             }
