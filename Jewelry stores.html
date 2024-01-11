@@ -159,6 +159,15 @@
             z-index: 4;
         }
 
+        @media (max-width: 768px) {
+            .window2 {
+                position: absolute;
+                width: 50%;
+                bottom: 23.5%;
+                justify-content: center;
+            }
+        }
+
         .button{
             width: 30%;
             margin: 5px;
@@ -243,11 +252,60 @@
             right:23%;
             top:52%;
         }
+		#err_div{
+			position: absolute;
+			width:100%;
+			height:100vh;
+			top:0;
+			left:0;
+			z-index: 8;
+			background-color: black;
+			opacity: 0.3;
+			display:none;
+		}
+		
+		#err{
+			border-radius: 4vh;
+			border:0.3vh solid #3e0903;
+			position: absolute;
+			width:80%;
+			height:20%;
+			top:50%;
+			left:50%;
+			transform: translate(-50%,-50%);
+			z-index: 9;
+			background-color: white;
+			font-size: 2vh;
+			display:none;
+			
+		}
+		#err_text{
+			position: absolute;
+			width:60%;
+			height:40%;
+			top:50%;
+			left:50%;
+			transform: translate(-50%,-50%);
+			color: #3e0903;
+			text-align: left;
+			word-wrap:break-word;
+		}
+		#err_back{
+			position: absolute;
+			width:5%;
+			right:5%;
+			top:5%;
+		}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="bg">
+			<div id="err_div"></div>
+			<div id="err">
+				<div id="err_text">由于浏览器的切换，需要用户重新搭配服饰</div>
+				<img src="material/err_back.png" id="err_back" onclick="err_back()">
+			</div>
             <img class="bgimg" src="./material/Jewelry stores/背景 首饰店.jpg">
             <img class="title" src="./material/Jewelry stores/首饰店 标题.png">
             <img class="back" onclick="back()" src="./material/素材 返回键.png">
@@ -285,30 +343,30 @@
 
             <div class="Frame" id="frame0">
                 <div class="frame" id="scrollable-div0" onmousedown="startDragging(event)" onmouseup="stopDragging()" onmouseleave="stopDragging()" onmousemove="drag(event)" ontouchstart="startDragging(event)" ontouchend="stopDragging()" ontouchmove="drag(event)">
-                    <img class="guanshi" onclick="guanshi(this)" src="./material/cloakroom/Guanshi/过桥髻.png">
-                    <img class="guanshi" onclick="guanshi(this)" src="./material/cloakroom/Guanshi/南宋银发冠.png">
-                    <img class="guanshi" onclick="guanshi(this)" src="./material/cloakroom/Guanshi/山口冠.png">
-                    <img class="guanshi" onclick="guanshi(this)" src="./material/cloakroom/Guanshi/宣化辽团冠.png">
-                    <img class="guanshi" onclick="guanshi(this)" src="./material/cloakroom/Guanshi/玉兰花团冠.png">
-                    <img class="guanshi" onclick="guanshi(this)" src="./material/cloakroom/Guanshi/重楼子花冠.png">
+                    <img class="guanshi" onclick="guanshi(this)" ontouchstart="guanshi(this)" src="./material/cloakroom/Guanshi/过桥髻.png">
+                    <img class="guanshi" onclick="guanshi(this)" ontouchstart="guanshi(this)" src="./material/cloakroom/Guanshi/南宋银发冠.png">
+                    <img class="guanshi" onclick="guanshi(this)" ontouchstart="guanshi(this)" src="./material/cloakroom/Guanshi/山口冠.png">
+                    <img class="guanshi" onclick="guanshi(this)" ontouchstart="guanshi(this)" src="./material/cloakroom/Guanshi/宣化辽团冠.png">
+                    <img class="guanshi" onclick="guanshi(this)" ontouchstart="guanshi(this)" src="./material/cloakroom/Guanshi/玉兰花团冠.png">
+                    <img class="guanshi" onclick="guanshi(this)" ontouchstart="guanshi(this)" src="./material/cloakroom/Guanshi/重楼子花冠.png">
                 </div>
             </div>
 
             <div class="Frame" id="frame1">
                 <div class="frame" id="scrollable-div1" onmousedown="startDragging(event)" onmouseup="stopDragging()" onmouseleave="stopDragging()" onmousemove="drag(event)" ontouchstart="startDragging(event)" ontouchend="stopDragging()" ontouchmove="drag(event)">
-                    <img class="fazan" onclick="fazan(this)" src="./material/cloakroom/Jewelry/Fazan/鎏金龙纹银簪.png">
-                    <img class="fazan" onclick="fazan(this)" src="./material/cloakroom/Jewelry/Fazan/宋鎏金花筒钗.png">
-                    <img class="fazan" onclick="fazan(this)" src="./material/cloakroom/Jewelry/Fazan/银胆平顶脚簪.png">
-                    <img class="fazan" onclick="fazan(this)" src="./material/cloakroom/Jewelry/Fazan/银鎏金并头花簪.png">
+                    <img class="fazan" onclick="fazan(this)" ontouchstart="fazan(this)" src="./material/cloakroom/Jewelry/Fazan/鎏金龙纹银簪.png">
+                    <img class="fazan" onclick="fazan(this)" ontouchstart="fazan(this)" src="./material/cloakroom/Jewelry/Fazan/宋鎏金花筒钗.png">
+                    <img class="fazan" onclick="fazan(this)" ontouchstart="fazan(this)" src="./material/cloakroom/Jewelry/Fazan/银胆平顶脚簪.png">
+                    <img class="fazan" onclick="fazan(this)" ontouchstart="fazan(this)" src="./material/cloakroom/Jewelry/Fazan/银鎏金并头花簪.png">
                 </div>
             </div>
 
             <div class="Frame" id="frame2">
                 <div class="frame" id="scrollable-div2" onmousedown="startDragging(event)" onmouseup="stopDragging()" onmouseleave="stopDragging()" onmousemove="drag(event)" ontouchstart="startDragging(event)" ontouchend="stopDragging()" ontouchmove="drag(event)">
-                    <img class="ershi" onclick="ershi(this)" src="./material/cloakroom/Jewelry/Ershi/双鬓凤嫋莲花.png">
-                    <img class="ershi" onclick="ershi(this)" src="./material/cloakroom/Jewelry/Ershi/宋宫灯形金耳坠.png">
-                    <img class="ershi" onclick="ershi(this)" src="./material/cloakroom/Jewelry/Ershi/同心结龟游叠胜耳坠.png">
-                    <img class="ershi" onclick="ershi(this)" src="./material/cloakroom/Jewelry/Ershi/银鎏金菊花纹耳环.png">
+                    <img class="ershi" onclick="ershi(this)" ontouchstart="ershi(this)" src="./material/cloakroom/Jewelry/Ershi/双鬓凤嫋莲花.png">
+                    <img class="ershi" onclick="ershi(this)" ontouchstart="ershi(this)" src="./material/cloakroom/Jewelry/Ershi/宋宫灯形金耳坠.png">
+                    <img class="ershi" onclick="ershi(this)" ontouchstart="ershi(this)" src="./material/cloakroom/Jewelry/Ershi/同心结龟游叠胜耳坠.png">
+                    <img class="ershi" onclick="ershi(this)" ontouchstart="ershi(this)" src="./material/cloakroom/Jewelry/Ershi/银鎏金菊花纹耳环.png">
                 </div>
             </div>
 
@@ -320,8 +378,19 @@
     <script>
         $(document).ready(function() {
             const people = localStorage.getItem("person");
-            $(".person").html(people);
+            if (people === null || people === "" || /\s/.test(person)){
+            	$("#err_div").css("display","block");
+            	$("#err").css("display","block");
+            }
+            else{
+            	$(".person").html(people);
+            }
         });
+		
+		function err_back(){
+			$("#err_div").css("display","none");
+			$("#err").css("display","none");
+		}
 
         var buttonElement = document.getElementsByClassName("button");
         for(var i=0;i<buttonElement.length;i++){

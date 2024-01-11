@@ -173,7 +173,7 @@
             width: 28%;
             margin: 10px 9px;
             cursor: pointer;
-            transition: left 0.3s ease-out;
+            transition: left 0.3s ease-out; 
         }
 
         .introduce{
@@ -189,11 +189,60 @@
             right:23%;
             top:52%;
         }
+		#err_div{
+			position: absolute;
+			width:100%;
+			height:100vh;
+			top:0;
+			left:0;
+			z-index: 8;
+			background-color: black;
+			opacity: 0.3;
+			display:none;
+		}
+		
+		#err{
+			border-radius: 4vh;
+			border:0.3vh solid #3e0903;
+			position: absolute;
+			width:80%;
+			height:20%;
+			top:50%;
+			left:50%;
+			transform: translate(-50%,-50%);
+			z-index: 9;
+			background-color: white;
+			font-size: 2vh;
+			display:none;
+			
+		}
+		#err_text{
+			position: absolute;
+			width:60%;
+			height:40%;
+			top:50%;
+			left:50%;
+			transform: translate(-50%,-50%);
+			color: #3e0903;
+			text-align: left;
+			word-wrap:break-word;
+		}
+		#err_back{
+			position: absolute;
+			width:5%;
+			right:5%;
+			top:5%;
+		}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="bg">
+			<div id="err_div"></div>
+			<div id="err">
+				<div id="err_text">由于浏览器的切换，需要用户重新搭配服饰</div>
+				<img src="material/err_back.png" id="err_back" onclick="err_back()">
+			</div>
             <img class="bgimg" src="./material/Hair/背景 发型店.jpg">
             <img class="title" src="./material/Hair/发型店 标题 .png">
             <img class="back" onclick="back()" src="./material/素材 返回键.png">
@@ -214,11 +263,11 @@
             <img class="window" src="./material/店铺素材1.png">
             <div class="Frame">
                 <div class="frame" id="scrollable-div" onmousedown="startDragging(event)" onmouseup="stopDragging()" onmouseleave="stopDragging()" onmousemove="drag(event)" ontouchstart="startDragging(event)" ontouchend="stopDragging()" ontouchmove="drag(event)">
-                    <img class="hair" onclick="change(this)" src="./material/cloakroom/Hairstyle/头饰 双丫髻.png">
-                    <img class="hair" onclick="change(this)" src="./material/cloakroom/Hairstyle/头饰 双盘髻.png">
-                    <img class="hair" onclick="change(this)" src="./material/cloakroom/Hairstyle/头饰 堕马髻.png">
-                    <img class="hair" onclick="change(this)" src="./material/cloakroom/Hairstyle/头饰 朝天髻.png">
-                    <img class="hair" onclick="change(this)" src="./material/cloakroom/Hairstyle/头饰 盘龙髻.png">
+                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/hairstyle/头饰 双丫髻.png">
+                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/hairstyle/头饰 双盘髻.png">
+                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/hairstyle/头饰 堕马髻.png">
+                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/hairstyle/头饰 朝天髻.png">
+                    <img class="hair" onclick="change(this)" ontouchstart="change(this)" src="./material/cloakroom/hairstyle/头饰 盘龙髻.png">
                 </div>
             </div>
 
@@ -230,8 +279,19 @@
     <script>
         $(document).ready(function() {
             const people = localStorage.getItem("person");
-            $(".person").html(people);
+            if (people === null || people === "" || /\s/.test(person)){
+            	$("#err_div").css("display","block");
+            	$("#err").css("display","block");
+            }
+            else{
+            	$(".person").html(people);
+            }
         });
+		
+		function err_back(){
+			$("#err_div").css("display","none");
+			$("#err").css("display","none");
+		}
 
         var isDragging = false;
         var startX = 0;
@@ -268,7 +328,7 @@
             var hairElements = document.getElementsByClassName("hair");
             for (var i = 0; i < hairElements.length; i++) {
                 if(a==hairElements[i]){
-                    document.getElementById("head").src = "./material/cloakroom/Hairstyle/hair" + i + ".png";
+                    document.getElementById("head").src = "./material/cloakroom/hairstyle/hair" + i + ".png";
                 }
             }
         }

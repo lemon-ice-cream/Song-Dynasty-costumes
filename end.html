@@ -167,6 +167,51 @@
             cursor: pointer;
         }
 		
+		#err_div{
+			position: absolute;
+			width:100%;
+			height:100vh;
+			top:0;
+			left:0;
+			z-index: 8;
+			background-color: black;
+			opacity: 0.3;
+			display:none;
+		}
+		
+		#err{
+			border-radius: 4vh;
+			border:0.3vh solid #3e0903;
+			position: absolute;
+			width:80%;
+			height:20%;
+			top:50%;
+			left:50%;
+			transform: translate(-50%,-50%);
+			z-index: 9;
+			background-color: white;
+			font-size: 2vh;
+			display:none;
+			
+		}
+		#err_text{
+			position: absolute;
+			width:60%;
+			height:40%;
+			top:50%;
+			left:50%;
+			transform: translate(-50%,-50%);
+			color: #3e0903;
+			text-align: left;
+			word-wrap:break-word;
+		}
+		#err_back{
+			position: absolute;
+			width:5%;
+			right:5%;
+			top:5%;
+		}
+		
 		#cover{
 			position: absolute;
 			width:100%;
@@ -201,6 +246,7 @@
 			font-size:2.1vh;
 			z-index: 6;
 			text-align: left;
+			word-wrap:break-word;
 		}
 		#text_save{
 			position: absolute;
@@ -250,7 +296,7 @@
 		}
 		 
 		function convertCanvasToImg(canvas) {
-		    var myBlob = dataURLtoBlob(canvas.toDataURL('img/png', 0.92));
+		    var myBlob = dataURLtoBlob(canvas.toDataURL('imgae/png', 0.92));
 		    myUrl = URL.createObjectURL(myBlob);
 		    downImg(myUrl);
 		}
@@ -274,11 +320,22 @@
 		    a.dispatchEvent(clickEvent);
 		}
 		
+		function err_back(){
+			$("#err_div").css("display","none");
+			$("#err").css("display","none");
+		}
+		
 		function save(){
 			const people = localStorage.getItem('people');
-			$("#end_person").html(people);
-			$("#cover_people").html(people);
-			$("#cover_people #pibo").attr("id","pibo_cover");
+			if (people === null || people === "" || /\s/.test(people)){
+				$("#err_div").css("display","block");
+				$("#err").css("display","block");
+			}
+			else{
+				$("#end_person").html(people);
+				$("#cover_people").html($("#end_person").html());
+				$("#cover_people #pibo").attr("id","pibo_cover");
+			}
 			const id = localStorage.getItem('name');
 			$("#name_text_save").html(id);
 		}
@@ -317,6 +374,11 @@
 				<img id="cover_img" src="./material/End/储存页面 背景.jpg"/>
 				<div id="cover_people">
 				</div>
+			</div>
+			<div id="err_div"></div>
+			<div id="err">
+				<div id="err_text">由于浏览器的切换，需要用户重新搭配服饰</div>
+				<img src="material/err_back.png" id="err_back" onclick="err_back()">
 			</div>
         </div>
     </div>
