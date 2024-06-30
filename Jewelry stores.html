@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>宋韵服饰——首饰店</title>
+    <title>宋韵卿裳——首饰店</title>
     <style>
         html,body {
             width: 100%;
@@ -165,32 +165,15 @@
             cursor: pointer;
         }
 
-        .window3{
-            display: flex;
-            position: absolute;
-            bottom: 0.5%;
-            left:3%;
-            overflow-x: hidden;
-            z-index: 4;
-        }
-
-        .basemap{
-            width: 28%;
-            margin: 0px 10px;
-            cursor: pointer;
-        }
-
         .Frame{
-            display: flex;
             position: absolute;
             bottom: 0.5%;
-            left:3%;
+            left:0;
             overflow-x: hidden;
             z-index: 4;
         }
 
         .frame{
-            display: flex;
             position: relative;
             cursor: grab;
             overflow-x: hidden;
@@ -199,35 +182,53 @@
         }
 
         #frame0{
-            bottom: 5%;
+            bottom: 2%;
         }
 
         .guanshi{
-            width: 25%;
-            margin: 0px 16px;
+            background-image:url('./material/basemap.png');
+            background-origin: border-box ;
+            background-size:100% 100%;
+            background-repeat: no-repeat;
+            width: 27%;
+            margin: 0px 14px;
+            padding: 10px 0px;
             cursor: pointer;
+            transition: left 0.3s ease-out;
         }
 
         #frame1{
             display: none;
-            bottom: 7%;
+            bottom: 2%;
         }
 
         .fazan{
-            width: 26%;
+            background-image:url('./material/basemap.png');
+            background-origin:  border-box;
+            background-size:100% 100%;
+            background-repeat: no-repeat;
+            width: 27%;
             margin: 0px 14px;
+            padding: 27.5px 0px;
             cursor: pointer;
+            transition: left 0.3s ease-out;
         }
 
         #frame2{
             display: none;
-            bottom: 7%;
+            bottom: 2%;
         }
 
         .ershi{
-            width: 26%;
-            margin: 0px 15px;
+            background-image:url('./material/basemap.png');
+            background-origin: border-box;
+            background-size:100% 100%;
+            background-repeat: no-repeat;
+            width: 27%;
+            margin: 0px 14px;
+            padding: 27.5px 0px;
             cursor: pointer;
+            transition: left 0.3s ease-out;
         }
     
         .introduce{
@@ -272,17 +273,6 @@
                 <img class="button" id="Ershi" onclick="toggle(this)" src="./material/Jewelry stores/button ershi.png">
             </div>
 
-            <div class="window3" id="frame">
-                <div class="frame" id="scrollable-div">
-                    <img class="basemap" src="./material/basemap.png">
-                    <img class="basemap" src="./material/basemap.png">
-                    <img class="basemap" src="./material/basemap.png">
-                    <img class="basemap" src="./material/basemap.png">
-                    <img class="basemap" src="./material/basemap.png">
-                    <img class="basemap" src="./material/basemap.png">
-                </div>
-            </div>
-
             <div class="Frame" id="frame0">
                 <div class="frame" id="scrollable-div0" onmousedown="startDragging(event)" onmouseup="stopDragging()" onmouseleave="stopDragging()" onmousemove="drag(event)" ontouchstart="startDragging(event)" ontouchend="stopDragging()" ontouchmove="drag(event)">
                     <img class="guanshi" onclick="guanshi(this)" src="./material/cloakroom/Guanshi/GuoQiaoJi.png">
@@ -312,8 +302,8 @@
                 </div>
             </div>
 
-            <img class="introduce" src="./material/科普界面.png">
-            <img class="buy" src="./material/购买按钮.png">
+            <img class="introduce" src="./material/introduce.png">
+            <img class="buy" src="./material/buy.png">
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -347,30 +337,6 @@
             for(var i=0;i<scrollableDiv.length;i++){
                 scrollableDiv[i].scrollLeft=0;
             }
-            if (frameId === "frame1"||frameId === "frame2") {
-                var basemapElements = scrollableDiv[0].getElementsByClassName("basemap");
-                if (basemapElements.length>=6) {
-                    var last= basemapElements[basemapElements.length - 1];
-                    last.parentNode.removeChild(last);
-
-                    var second= basemapElements[basemapElements.length - 2];
-                    second.parentNode.removeChild(second);
-                }
-            }
-            else if(frameId === "frame0"){
-                var basemapElements = scrollableDiv[0].getElementsByClassName("basemap");
-                if (basemapElements.length <6) {
-                    var newBasemap1 = document.createElement("img");
-                    newBasemap1.className = "basemap";
-                    newBasemap1.src = "./material/basemap.png";
-                    scrollableDiv[0].appendChild(newBasemap1);
-
-                    var newBasemap2 = document.createElement("img");
-                    newBasemap2.className = "basemap";
-                    newBasemap2.src = "./material/basemap.png";
-                    scrollableDiv[0].appendChild(newBasemap2);
-                }
-            }
         }
 
         function startDragging(event) {
@@ -390,11 +356,9 @@
 
         function drag(event) {
             if (!isDragging) return;
-            var scrollableDiv = document.getElementById('scrollable-div');
-            var scrollableDiv1 = event.currentTarget;
+            var scrollableDiv = event.currentTarget;
             var scrollX = getClientX(event) - startX;
             scrollableDiv.scrollLeft = scrollLeft - scrollX;
-            scrollableDiv1.scrollLeft = scrollLeft - scrollX;
         }
 
         function getClientX(event) {

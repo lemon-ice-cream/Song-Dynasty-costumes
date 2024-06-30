@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>宋韵服饰——服装店</title>
+    <title>宋韵卿裳——服装店</title>
     <style>
         html,body {
             width: 100%;
@@ -165,32 +165,15 @@
             cursor: pointer;
         }
 
-        .window3{
-            display: flex;
-            position: absolute;
-            bottom: 0.5%;
-            left:3%;
-            overflow-x:hidden;
-            z-index: 4;
-        }
-
-        .basemap{
-            width: 28%;
-            margin: 0px 10px;
-            cursor: pointer;
-        }
-
         .Frame{
-            display: flex;
             position: absolute;
             bottom: 0.5%;
-            left:3%;
+            left:0;
             overflow-x:hidden;
             z-index: 4;
         }
 
         .frame{
-            display: flex;
             position: relative;
             cursor: grab;
             overflow-x: hidden;
@@ -199,57 +182,87 @@
         }
 
         #frame0{
-            bottom: 2%;
+            bottom: 0.5%;
         }
 
         .ruyi{
+            background-image:url('./material/basemap.png');
+            background-origin: border-box ;
+            background-size:100% 100%;
+            background-repeat: no-repeat;
             width: 25%;
-            margin: 0px 17px;
+            margin: 0px 10px;
+            padding: 10px 10px;
             cursor: pointer;
+            transition: left 0.3s ease-out;
         }
 
         #frame1{
             display: none;
-            height: 22%;
-            bottom: 2%;
+            bottom: 0.5%;
         }
 
         .beizi{
-            margin: 0px 44px;
+            background-image:url('./material/basemap.png');
+            background-origin: border-box ;
+            background-size:100% 100%;
+            background-repeat: no-repeat;
+            width: 13%;
+            margin: 0px 10px;
+            padding: 14.2px 40.5px;
             cursor: pointer;
+            transition: left 0.3s ease-out;
         }
 
         #frame2{
             display: none;
-            height: 22%;
-            bottom: 2%;
+            bottom: 0.5%;
         }
 
         .qunzi{
-            margin: 0px 44px;
+            background-image:url('./material/basemap.png');
+            background-origin: border-box ;
+            background-size:100% 100%;
+            background-repeat: no-repeat;
+            width: 12%;
+            margin: 0px 10px;
+            padding: 17.5px 43px;
             cursor: pointer;
+            transition: left 0.3s ease-out;
         }
 
         #frame3{
             display: none;
-            bottom: 7%;
+            bottom: 0.5%;
         }
 
         .moxiong{
-            width: 23%;
-            margin: 0px 22px;
+            background-image:url('./material/basemap.png');
+            background-origin: border-box ;
+            background-size:100% 100%;
+            background-repeat: no-repeat;
+            width: 25%;
+            margin: 0px 10px;
+            padding: 41px 10px;
             cursor: pointer;
+            transition: left 0.3s ease-out;
         }
 
         #frame4{
             display: none;
-            bottom: 6%;
+            bottom: 0.5%;
         }
 
         .pibo{
-            width: 23%;
-            margin: 0px 22px;
+            background-image:url('./material/basemap.png');
+            background-origin: border-box ;
+            background-size:100% 100%;
+            background-repeat: no-repeat;
+            width: 25%;
+            margin: 0px 10px;
+            padding: 44.5px 10px;
             cursor: pointer;
+            transition: left 0.3s ease-out;
         }
 
         .introduce{
@@ -296,15 +309,6 @@
                 <img class="button" id="Pibo" onclick="toggle(this)" src="./material/Clothing stores/button pibo.png">
             </div>
 
-            <div class="window3" id="frame">
-                <div class="frame" id="scrollable-div">
-                    <img class="basemap" src="./material/basemap.png">
-                    <img class="basemap" src="./material/basemap.png">
-                    <img class="basemap" src="./material/basemap.png">
-                    <img class="basemap" src="./material/basemap.png">
-                </div>
-            </div>
-
             <div class="Frame" id="frame0">
                 <div class="frame" id="scrollable-div0" onmousedown="startDragging(event)" onmouseup="stopDragging()" onmouseleave="stopDragging()" onmousemove="drag(event)" ontouchstart="startDragging(event)" ontouchend="stopDragging()" ontouchmove="drag(event)">
                     <img class="ruyi" onclick="ruyi(this)" src="./material/cloakroom/Outerwear/Ruyi/blue.png">
@@ -348,8 +352,8 @@
                 </div>
             </div>
 
-            <img class="introduce" src="./material/科普界面.png">
-            <img class="buy" src="./material/购买按钮.png">
+            <img class="introduce" src="./material/introduce.png">
+            <img class="buy" src="./material/buy.png">
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -383,21 +387,6 @@
             for(var i=0;i<scrollableDiv.length;i++){
                 scrollableDiv[i].scrollLeft=0;
             }
-            if (frameId === "frame3"||frameId === "frame4") {
-                var basemapElements = scrollableDiv[0].getElementsByClassName("basemap");
-                if (basemapElements.length>=4) {
-                    var last= basemapElements[basemapElements.length - 1];
-                    last.parentNode.removeChild(last);
-                }
-            }else{
-                var basemapElements = scrollableDiv[0].getElementsByClassName("basemap");
-                if (basemapElements.length <4) {
-                    var newBasemap= document.createElement("img");
-                    newBasemap.className = "basemap";
-                    newBasemap.src = "./material/basemap.png";
-                    scrollableDiv[0].appendChild(newBasemap);
-                }
-            }
         }
 
         function startDragging(event) {
@@ -419,11 +408,9 @@
 
         function drag(event) {
             if (!isDragging) return;
-            var scrollableDiv = document.getElementById('scrollable-div');
-            var scrollableDiv1 = event.currentTarget;
+            var scrollableDiv = event.currentTarget;
             var scrollX = getClientX(event) - startX;
             scrollableDiv.scrollLeft = scrollLeft - scrollX;
-            scrollableDiv1.scrollLeft = scrollLeft - scrollX;
         }
 
         function getClientX(event) {

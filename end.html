@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>宋韵服饰</title>
+    <title>宋韵卿裳——留影</title>
     <style>
         html,body {
             width: 100%;
@@ -226,14 +226,14 @@
 	        var bgimg = document.getElementsByClassName("bgimg")[0];
 			var cover_bgimg = document.getElementById("cover_img");
 	        if(a===Elements[0]){
-	            bgimg.src = "./material/Hair/背景 发型店.jpg";
-				cover_bgimg.src = "./material/Hair/背景 发型店.jpg";
+	            bgimg.src = "./material/Hair/hair bg.jpg";
+				cover_bgimg.src = "./material/Hair/hair bg.jpg";
 	        }else if(a===Elements[1]){
-	            bgimg.src = "./material/Clothing stores/服装店 背景.jpg";
-				cover_bgimg.src = "./material/Clothing stores/服装店 背景.jpg";
+	            bgimg.src = "./material/Clothing stores/Clothing stores bg.jpg";
+				cover_bgimg.src = "./material/Clothing stores/Clothing stores bg.jpg";
 	        }else if(a===Elements[2]){
-	            bgimg.src = "./material/Jewelry stores/背景 首饰店.jpg";
-				cover_bgimg.src = "./material/Jewelry stores/背景 首饰店.jpg";
+	            bgimg.src = "./material/Jewelry stores/Jewelry stores bg.jpg";
+				cover_bgimg.src = "./material/Jewelry stores/Jewelry stores bg.jpg";
 	        }
 	    }
 		
@@ -287,12 +287,12 @@
 <body onload="save()">
     <div class="container">
         <div id="bg">
-            <img class="bgimg" src="./material/End/储存页面 背景.jpg">
-            <img class="tip" src="./material/End/储存页面 文字框.png">
+            <img class="bgimg" src="./material/End/save bg.jpg">
+            <img class="tip" src="./material/End/save text.png">
 			<div id="name_text_save"></div>
 			<div id="text_save">恭喜你，生成了你的宋韵专属人物形象</div>
-            <img class="save" onclick="takeScreenshot()" src="./material/End/按键 保存图片.png">
-            <img class="again" onclick="again_game()" src="./material/End/按键 再来一遍.png" />
+            <img class="save" onclick="takeScreenshot()" src="./material/End/button save.png">
+            <img class="again" onclick="again_game()" src="./material/End/button again.png" />
 
             <div id="end_person">
                 <img id="head" src="./material/cloakroom/hairstyle/hair0.png">
@@ -309,12 +309,12 @@
 
             <img class="window" src="./material/window1.png">
             <div class="Frame">
-                <img class="background" onclick="change(this)" src="./material/Hair/背景 发型店.jpg">
-                <img class="background" onclick="change(this)" src="./material/Clothing stores/服装店 背景.jpg">
-                <img class="background" onclick="change(this)" src="./material/Jewelry stores/背景 首饰店.jpg">
+                <img class="background" onclick="change(this)" src="./material/Hair/hair bg.jpg">
+                <img class="background" onclick="change(this)" src="./material/Clothing stores/Clothing stores bg.jpg">
+                <img class="background" onclick="change(this)" src="./material/Jewelry stores/Jewelry stores bg.jpg">
             </div>
 			<div id="cover">
-				<img id="cover_img" src="./material/End/储存页面 背景.jpg"/>
+				<img id="cover_img" src="./material/End/save bg.jpg"/>
 				<div id="cover_people">
 				</div>
 			</div>
