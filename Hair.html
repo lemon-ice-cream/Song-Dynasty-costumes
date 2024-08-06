@@ -178,19 +178,62 @@
             transition: left 0.3s ease-out;
         }
 
-        .introduce{
+        #introduce{
             position: absolute;
-            height: 38%;
-            top:12%;
-            right:12%;
+            height: 45%;
+            top:10%;
+            right:7%;
+            transition: transform 0.5s ease;
         }
 
-        .buy{
+        .text{
             position: absolute;
-            width: 17%;
-            right:23%;
-            top:52%;
+            color: #91493D;
+            transition: transform 0.5s ease;
         }
+
+        #headline{
+            top:16.5%;
+            right:25%;
+            font-weight: bold;
+        }
+
+        #text1{
+            font-size: 80%;
+            text-align: left;
+            width: 35%;
+            top:25%;
+            right:11.5%;
+            display: block;
+        }
+
+        @keyframes turn {
+            0%{
+                transform: rotateY(180deg);
+            }
+            100%{
+                transform:rotateY(0deg);
+            }
+        }
+
+        #oppsite{
+            position: absolute;
+            width: 30%;
+            top: 24%;
+            right: 15%;
+            text-align: center;
+            display: none;
+        }
+
+        #photo{
+            width: 100%;
+        }
+
+        #text2{
+            width: 100%;
+            margin-top: 3%;
+        }
+
     </style>
 </head>
 <body>
@@ -224,8 +267,13 @@
                 </div>
             </div>
 
-            <img class="introduce" src="./material/introduce.png">
-            <img class="buy" src="./material/buy.png">
+            <img id="introduce" src="./material/introduce.png">
+            <div class="text" id="headline">双丫髻</div>
+            <div class="text" id="text1">&emsp;&emsp;古代少女发髯名。宋代少女一般以梳双髻为多，双丫髻是双挂式中最常见之发式，其梳编法是将发平分两侧，再梳结成髻，置于头顶两侧。前额外负担多饰有垂发，俗称刘海。即在头上或在额旁梳成两个小鬟。宋代黄庭坚有：“学绾双鬟年纪小”和“云鬟垂两耳”诗句。</div>
+            <div id="oppsite">
+                <img id="photo" src="./material/cloakroom/Hairstyle/photo0.png"></img>
+                <p class="text" id="text2">双丫髻高髻陶女俑</p>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -266,14 +314,62 @@
             return event.clientX;
         }
 
+        // 创建一个新的 XMLHttpRequest 对象，用于进行 HTTP 请求
+        var text = new XMLHttpRequest();
+        // 初始化请求，使用 GET 方法获取名为 'textContents.txt' 的文件，第三个参数 'true' 表示请求是异步的
+        text.open('GET', './material/cloakroom/Hairstyle/textContents.txt', true);
+        var textContents;
+
         function change(a) {
+            // 从点击的图片的 src 属性中获取文件名
+            const imageName = a.src.split('/').pop(); 
             var hairElements = document.getElementsByClassName("hair");
             for (var i = 0; i < hairElements.length; i++) {
                 if(a==hairElements[i]){
                     document.getElementById("head").src = "./material/cloakroom/Hairstyle/hair" + i + ".png";
+                    document.getElementById("photo").src = "./material/cloakroom/Hairstyle/photo" + i + ".png";
+                }
+            }
+            // 遍历分割后的文本内容数组
+            for (let content of textContents) { 
+                // 将每一行内容按照 ': '割为发型名称、标题和文本
+                let [hairstyle, headline, text1,text2] = content.split(':'); 
+                if (imageName === hairstyle + '.png') { 
+                    document.getElementById("headline").innerHTML = headline; 
+                    document.getElementById("text1").innerHTML = "&emsp;&emsp;"+text1; 
+                    document.getElementById("text2").innerHTML = text2; 
+                    break; 
                 }
             }
         }
+
+        // 为 XMLHttpRequest 对象的 readyStateChange 事件添加一个回调函数
+        text.onreadystatechange = function(){
+            // 当请求的状态为 4（表示请求已完成）且状态码为 200（表示成功）时执行以下代码
+            if(text.readyState === 4 && text.status === 200){
+                // 将获取到的文件内容按照换行符分割成一个数组
+                textContents = text.responseText.split('\n'); 
+            }
+        }
+        text.send();
+
+        const introduce = document.getElementById('introduce');
+        const text1 = document.getElementById('text1');
+        const oppsite = document.getElementById('oppsite');
+
+        introduce.addEventListener('click', () => {
+            if (introduce.style.transform === 'rotateY(180deg)') {
+                introduce.style.transform = 'rotateY(0deg)';
+                text1.style.display = 'block';
+                text1.style.animation = 'turn 0.5s forwards';
+                oppsite.style.display = 'none';
+            } else {
+                introduce.style.transform = 'rotateY(180deg)';
+                text1.style.display = 'none';
+                oppsite.style.display = 'block';
+                oppsite.style.animation = 'turn 0.5s forwards';
+            }
+        });
 
         function back(){
             var divContent = $(".person").html();

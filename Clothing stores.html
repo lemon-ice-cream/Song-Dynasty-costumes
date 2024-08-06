@@ -265,18 +265,67 @@
             transition: left 0.3s ease-out;
         }
 
-        .introduce{
+        #introduce{
             position: absolute;
-            height: 38%;
-            top:12%;
-            right:12%;
+            width: 45%;
+            height: 45%;
+            top:10%;
+            right: 7%;
+            text-align: center;
         }
 
-        .buy{
+        #background{
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .text{
             position: absolute;
-            width: 17%;
-            right:23%;
-            top:52%;
+            color: #91493D;
+            transition: transform 0.5s ease;
+        }
+
+        #headline{
+            width: 100%;
+            top:10%;
+            font-weight: bold;
+        }
+
+        #text1{
+            font-size: 80%;
+            text-align: left;
+            width: 73%;
+            top:33%;
+            right:14%;
+            display: block;
+        }
+
+        @keyframes turn {
+            0%{
+                transform: rotateY(180deg);
+            }
+            100%{
+                transform:rotateY(0deg);
+            }
+        }
+
+        #oppsite{
+            position: absolute;
+            width: 65%;
+            top: 32%;
+            right: 17%;
+            text-align: center;
+            transform: rotateY(180deg);
+            display: none;
+        }
+
+        #photo{
+            width: 100%;
+        }
+
+        #text2{ 
+            width: 100%;
+            margin-top: 3%;
         }
     </style>
 </head>
@@ -302,11 +351,11 @@
 
             <img class="window1" src="./material/window2.png">
             <div class="window2">
-                <img class="button" id="Ruyi"  onclick="toggle(this)" src="./material/Clothing stores/button ruyi.png">
-                <img class="button" id="Beizi" onclick="toggle(this)" src="./material/Clothing stores/button beizi.png">
-                <img class="button" id="Qunzi" onclick="toggle(this)" src="./material/Clothing stores/button qunzi.png">
-                <img class="button" id="Moxiong" onclick="toggle(this)" src="./material/Clothing stores/button moxiong.png">
-                <img class="button" id="Pibo" onclick="toggle(this)" src="./material/Clothing stores/button pibo.png">
+                <img class="button" id="Ruyi"  onclick="toggle(this)" src="./material/Clothing stores/ruyi.png">
+                <img class="button" id="Beizi" onclick="toggle(this)" src="./material/Clothing stores/beizi.png">
+                <img class="button" id="Qunzi" onclick="toggle(this)" src="./material/Clothing stores/qunzi.png">
+                <img class="button" id="Moxiong" onclick="toggle(this)" src="./material/Clothing stores/moxiong.png">
+                <img class="button" id="Pibo" onclick="toggle(this)" src="./material/Clothing stores/pibo.png">
             </div>
 
             <div class="Frame" id="frame0">
@@ -352,8 +401,15 @@
                 </div>
             </div>
 
-            <img class="introduce" src="./material/introduce.png">
-            <img class="buy" src="./material/buy.png">
+            <div id="introduce">
+                <img id="background" src="./material/introduce.png">
+                <p class="text" id="headline">襦衣</p>
+                <div class="text" id="text1">&emsp;&emsp;襦在宋代时期的样式：衣长到腰部，多用对襟的领口，袖口收的相对紧窄。襦的种类有多种，既有类似于衫的单襦，又有与袄样式相近的复襦。宋代女性在襦上加以刺绣，为的是使襦看起来更精致美观，更具有装饰性。不同年龄阶段和社会阶层的女性在穿着襦时会选择不同颜色来搭配自身。</div>
+                <div id="oppsite">
+                    <img id="photo" src="./material/cloakroom/photo0.png"></img>
+                    <p class="text" id="text2"></p>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -372,12 +428,28 @@
         var startX = 0;
         var scrollLeft = 0;
 
+        // 创建一个新的 XMLHttpRequest 对象，用于进行 HTTP 请求
+        var text = new XMLHttpRequest();
+        var textContents;
+        text.open('GET', './material/cloakroom/textContents.txt', true);
+        // 为 XMLHttpRequest 对象的 readyStateChange 事件添加一个回调函数
+        text.onreadystatechange = function() {
+            // 当请求的状态为 4（表示请求已完成）且状态码为 200（表示成功）时执行以下代码
+            if (text.readyState === 4 && text.status === 200) {
+                textContents = text.responseText.split('\n'); 
+            }
+        }
+        text.send();
+
         function toggle(a){
+            // 从点击的图片的 src 属性中获取文件名
+            const imageName = a.src.split('/').pop(); 
             var frameElements = document.getElementsByClassName("Frame");
             var frameId = a.getAttribute("data-frame");
             for (var i = 0; i < frameElements.length; i++) {
                 if (frameElements[i].id === frameId) {
                     frameElements[i].style.display = "flex";
+                    document.getElementById("photo").src = "./material/cloakroom/photo" + i + ".png";
                 } else {
                     frameElements[i].style.display = "none";
                 }
@@ -386,6 +458,16 @@
             var scrollableDiv= document.getElementsByClassName('frame');
             for(var i=0;i<scrollableDiv.length;i++){
                 scrollableDiv[i].scrollLeft=0;
+            }
+            // 遍历分割后的文本内容数组
+            for (let content of textContents) { 
+                let [name, headline, text1, text2] = content.split(':'); 
+                if (imageName === name + '.png') { 
+                    document.getElementById("headline").innerHTML = headline; 
+                    document.getElementById("text1").innerHTML = "&emsp;&emsp;"+text1; 
+                    document.getElementById("text2").innerHTML = text2; 
+                    break; 
+                }
             }
         }
 
@@ -471,6 +553,25 @@
                 }
             }
         }
+
+        const background = document.getElementById('background');
+        const headline = document.getElementById('headline');
+        const text1 = document.getElementById('text1');
+        const oppsite = document.getElementById('oppsite');
+
+        background.addEventListener('click', () => {
+            if (background.style.transform === 'rotateY(180deg)') {
+                background.style.transform = 'rotateY(0deg)';
+                text1.style.display = 'block';
+                text1.style.animation = 'turn 0.5s forwards';
+                oppsite.style.display = 'none';
+            } else {
+                background.style.transform = 'rotateY(180deg)';
+                text1.style.display = 'none';
+                oppsite.style.display = 'block';
+                oppsite.style.animation = 'turn 0.5s forwards';
+            }
+        });
 
         function back(){
             var divContent = $(".person").html();
