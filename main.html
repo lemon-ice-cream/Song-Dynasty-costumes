@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>宋韵卿裳——街景</title>
+    <meta name="x5-fullscreen" content="true">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>宋韵卿裳街景</title>
     <style>
         html,body {
             width: 100%;
@@ -11,481 +12,207 @@
             margin: 0;
             padding: 0;
         }
-        .container{
-            display: flex;
-            position: relative;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;/* 可视窗口的高度 */
+
+        .loading{
+            position: fixed;
+            top: 0;
+            left:0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 3s ease;
         }
 
-        /* 1.服装店 */
-        .clothingShopBox{
-            display: flex;
-            position: absolute;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; 
-            width: 640px;
+        .loading_out {
+            opacity: 0;
+            transition: opacity 3s ease;
+        }
+
+        .container {
+            position: relative;
+            margin: 0 auto;
+            height: 100vh;
+            width: 100%;
             overflow: hidden;
-            background-image: url("./image/bgImg.jpg");
-            background-size: cover;
-            background-position: 0px center;
-            opacity: 1;
-            z-index: 10;
         }
-        .clothingShopImg{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 1;
-        }
-        .clothingShopWord{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 2;
-        }
-        .clothingShopTips{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 3;
-        }
-        .clothingShopBtn{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 4;
-        }
-        .right2 {
-            cursor: pointer;
-            z-index: 5;
-            width: 10%;
-            height: auto;
-            right:3%;
-            top:50%;
-            position: absolute;
-        }
-        #clothingShopLink{
-            cursor: pointer;
-            z-index: 5;
-            width: 15%;
-            height: 10%;
-            left: 29%;
-            top: 65%;
-            position: absolute;
-            opacity: 0;
-            background-color: brown;
-        }
-        /* 2.首饰店 */
-        .jewelryShopBox{
+        
+        .bg {
+            position: relative;
+            height: 100%;
             display: flex;
-            position: absolute;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; 
-            width: 640px;
+            cursor: grab;
             overflow: hidden;
-            background-image: url("./image/bgImg.jpg");
-            background-size: cover;
-            background-position: right center;
-            opacity: 0;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
         }
-        .jewelryShopImg{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
+
+        .bgimg {
+            height: 100%;
+		}
+
+        .tip1{
             position: absolute;
-            z-index: 1;
-        }
-        .jewelryShopWord{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 2;
-        }
-        .jewelryShopTips{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 3;
-        }
-        .jewelryShopBtn{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 4;
-        }
-        .right3{
-            cursor: pointer;
             z-index: 5;
-            width: 10%;
-            height: auto;
-            right:3%;
-            top:50%;
-            position: absolute;
+            height: 13%;
+            left: 0%;
+            bottom: 14%;
         }
-        .left1{
-            cursor: pointer;
+
+        .tip2{
+            position: absolute;
             z-index: 5;
-            width: 10%;
-            height: auto;
-            left:3%;
-            top:50%;
-            position: absolute;
+            height: 13%;
+            transform: translateX(50%);
+            bottom: 25%;
         }
-        #jewelryShopLink{
-            cursor: pointer;
+
+        .tip3{
+            position: absolute;
             z-index: 5;
-            width: 15%;
-            height: 10%;
-            left: 65%;
-            top: 65%;
-            position: absolute;
-            opacity: 0;
-            background-color: brown;
+            height: 13%;
+            transform: translateX(160%);
+            bottom: 25%;
         }
-        /* 3.发型店 */
-        .hairShopBox{
-            display: flex;
+
+        .tip4{
             position: absolute;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; 
-            width: 640px;
-            overflow: hidden;
-            background-image: url("./image/bgImg.jpg");
-            background-size: cover;
-            background-position: 10% center;
-            opacity: 0;
-        }
-        .hairShopImg{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 1;
-        }
-        .hairShopWord{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 2;
-        }
-        .hairShopTips{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 3;
-        }
-        .hairShopBtn{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 4;
-        }
-        .right4{
-            cursor: pointer;
             z-index: 5;
-            width: 10%;
-            height: auto;
-            right:3%;
-            top:50%;
-            position: absolute;
+            height: 13%;
+            transform: translateX(215%);
+            bottom: 10%;
         }
-        .left2{
-            cursor: pointer;
-            z-index: 5;
-            width: 10%;
-            height: auto;
-            left:3%;
-            top:50%;
-            position: absolute;
-        }
-        #hairShopLink{
-            cursor: pointer;
-            z-index: 5;
-            width: 15%;
-            height: 10%;
-            left: 21%;
-            top: 62%;
-            position: absolute;
-            opacity: 0;
-            background-color: brown;
-        }
-        /* 4.衣帽间 */
-        .cloakroomBox{
-            display: flex;
-            position: absolute;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; 
-            width: 640px;
-            overflow: hidden;
-            background-image: url("./image/bgImg.jpg");
-            background-size: cover;
-            background-position: 90% center;
-            opacity: 0;
-        }
-        .cloakroomImg{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 1;
-        }
-        .cloakroomWord{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 2;
-        }
-        .cloakroomTips{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 3;
-        }
-        .cloakroomBtn{
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            z-index: 4;
-        }
-        .left3{
-            cursor: pointer;
-            z-index: 5;
-            width: 10%;
-            height: auto;
-            left:3%;
-            top:50%;
-            position: absolute;
-        }
-        #cloakroomLink{
-            cursor: pointer;
-            z-index: 5;
-            width: 15%;
-            height: 10%;
-            left: 55%;
-            top: 66%;
-            position: absolute;
-            opacity: 0;
-            background-color: brown;
-        }
+
     </style>
 </head>
 <body>
-    <div class="container" id="container">
-        <!-- 1.服装店 -->
-        <div class="clothingShopBox" id="clothingShopBox">
-            <img src="./image/clothingShop.png" alt="服装店" class="clothingShopImg" id="clothingShopImg">
-            <img src="./image/clothingShopBtn.png" alt="点击进入服装店" class="clothingShopBtn">
-            <img src="./image/clothingShopWord.png" alt="华服轩·服装店" class="clothingShopWord">
-            <img src="./image/clothingShopTips.png" alt="服装店提示" class="clothingShopTips">
-            <a href="Clothing stores.html" id="clothingShopLink"></a>
-            <img src="./image/rightClickBtn.png" alt="下一页首饰店" id="right2" class="right2" onclick="rto2()">
+    <div class="loading"></div>
+    <div class="container">
+        <div class="bg" id="scrollable-div" onmousedown="startDragging(event)" onmouseup="stopDragging()" onmouseleave="stopDragging()" onmousemove="drag(event)" ontouchstart="startDragging(event)" ontouchend="stopDragging()" ontouchmove="drag(event)">
+            <img class="bgimg" src="./image/allbg.png">
+            <img class="tip1"  src="./image/clothingShopTips.png">
+            <img class="tip2"  src="./image/hairShopTips.png">
+            <img class="tip3"  src="./image/jewelryShopTips.png">
+            <img class="tip4"  src="./image/cloakroomTips.png">
         </div>
-
-        <script type="text/javascript">
-            window.addEventListener('load',function(){
-                var fzdimg = document.getElementById('clothingShopImg');//获取图片元素
-                var fzdbox = clothingShopImg.parentNode;//获取盒子元素
-                var fzdWidth = clothingShopImg.width;//获取图片宽度
-                fzdbox.style.width=fzdWidth+'px';
-            });
-        </script>
-
-        <script type="text/javascript">
-            function rto2() {
-                var clothingShopBox = document.querySelector(".clothingShopBox");
-                var jewelryShopBox = document.querySelector(".jewelryShopBox");
-                if (clothingShopBox.style.opacity == "1") {
-                    clothingShopBox.style.opacity = "0";
-                    jewelryShopBox.style.opacity = "1";
-                    clothingShopBox.style.zIndex = "-1";
-                    jewelryShopBox.style.zIndex = "10";
-                } else {
-                    clothingShopBox.style.opacity = "1";
-                    jewelryShopBox.style.opacity = "0";
-                    clothingShopBox.style.zIndex = "10";
-                    jewelryShopBox.style.zIndex = "-1";
-                }
-            }
-        </script>
-        
-        <!-- 2.首饰店 -->
-        <div class="jewelryShopBox" id="jewelryShopBox">
-            <img src="./image/jewelryShop.png" alt="首饰店" class="jewelryShopImg" id="jewelryShopImg">
-            <img src="./image/jewelryShopBtn.png" alt="点击进入首饰店" class="jewelryShopBtn">
-            <img src="./image/jewelryShopWord.png" alt="白玉堂·首饰店" class="jewelryShopWord">
-            <img src="./image/jewelryShopTips.png" alt="首饰店提示" class="jewelryShopTips">
-            <a href="Jewelry stores.html" id="jewelryShopLink"></a>
-            <img src="./image/rightClickBtn.png" alt="下一页发型店" id="right3" class="right3" onclick="rto3()">
-            <img src="./image/leftClickBtn.png" alt="上一页服装店" id="left1" class="left1" onclick="lto1()">
-        </div>
-
-        <script type="text/javascript">
-            window.addEventListener('load',function(){
-                var ssdimg = document.getElementById('jewelryShopImg');//获取图片元素
-                var ssdbox = jewelryShopImg.parentNode;//获取盒子元素
-                var ssdWidth = jewelryShopImg.width;//获取图片宽度
-                ssdbox.style.width=ssdWidth+'px';
-            });
-        </script>
-
-        <script type="text/javascript">
-            function rto3() {
-                var hairShopBox = document.querySelector(".hairShopBox");
-                var jewelryShopBox = document.querySelector(".jewelryShopBox");
-                if (jewelryShopBox.style.opacity == "1") {
-                    jewelryShopBox.style.opacity = "0";
-                    hairShopBox.style.opacity = "1";
-                    jewelryShopBox.style.zIndex = "-1";
-                    hairShopBox.style.zIndex = "10";
-                } else {
-                    jewelryShopBox.style.opacity = "1";
-                    hairShopBox.style.opacity = "0";
-                    jewelryShopBox.style.zIndex = "10";
-                    hairShopBox.style.zIndex = "-1";
-                }
-            }
-            function lto1() {
-                var clothingShopBox = document.querySelector(".clothingShopBox");
-                var jewelryShopBox = document.querySelector(".jewelryShopBox");
-                if (jewelryShopBox.style.opacity == "1") {
-                    clothingShopBox.style.opacity = "1";
-                    jewelryShopBox.style.opacity = "0";
-                    clothingShopBox.style.zIndex = "10";
-                    jewelryShopBox.style.zIndex = "-1";
-                } else {
-                    clothingShopBox.style.opacity = "0";
-                    jewelryShopBox.style.opacity = "1";
-                    clothingShopBox.style.zIndex = "-1";
-                    jewelryShopBox.style.zIndex = "10";
-                }
-            }
-        </script>
-
-        <!-- 3.发型店 -->
-        <div class="hairShopBox" id="hairShopBox">
-            <img src="./image/hairShop.png" alt="发型店" class="hairShopImg" id="hairShopImg">
-            <img src="./image/hairShopBtn.png" alt="点击进入发型店" class="hairShopBtn">
-            <img src="./image/hairShopWord.png" alt="青丝坊·发型店" class="hairShopWord">
-            <img src="./image/hairShopTips.png" alt="发型店提示" class="hairShopTips">
-            <a href="Hair.html" id="hairShopLink"></a>
-            <img src="./image/rightClickBtn.png" alt="下一页衣帽间" id="right4" class="right4" onclick="rto4()">
-            <img src="./image/leftClickBtn.png" alt="上一页首饰店" id="left2" class="left2" onclick="lto2()">
-        </div>
-
-        <script type="text/javascript">
-            window.addEventListener('load',function(){
-                var fxdimg = document.getElementById('hairShopImg');//获取图片元素
-                var fxdbox = hairShopImg.parentNode;//获取盒子元素
-                var fxdWidth = hairShopImg.width;//获取图片宽度
-                fxdbox.style.width=fxdWidth+'px';
-            });
-        </script>
-
-        <script type="text/javascript">
-            function rto4() {
-                var hairShopBox = document.querySelector(".hairShopBox");
-                var cloakroomBox = document.querySelector(".cloakroomBox");
-                if (hairShopBox.style.opacity == "1") {
-                    hairShopBox.style.opacity = "0";
-                    cloakroomBox.style.opacity = "1";
-                    hairShopBox.style.zIndex = "-1";
-                    cloakroomBox.style.zIndex = "10";
-                } else {
-                    hairShopBox.style.opacity = "1";
-                    cloakroomBox.style.opacity = "0";
-                    hairShopBox.style.zIndex = "10";
-                    cloakroomBox.style.zIndex = "-1";
-                }
-            }
-            function lto2() {
-                var hairShopBox = document.querySelector(".hairShopBox");
-                var jewelryShopBox = document.querySelector(".jewelryShopBox");
-                if (hairShopBox.style.opacity == "1") {
-                    jewelryShopBox.style.opacity = "1";
-                    hairShopBox.style.opacity = "0";
-                    jewelryShopBox.style.zIndex = "10";
-                    hairShopBox.style.zIndex = "-1";
-                } else {
-                    jewelryShopBox.style.opacity = "0";
-                    hairShopBox.style.opacity = "1";
-                    jewelryShopBox.style.zIndex = "-1";
-                    hairShopBox.style.zIndex = "10";
-                }
-            }
-        </script>
-
-        <!-- 4.衣帽间 -->
-        <div class="cloakroomBox" id="cloakroomBox">
-            <img src="./image/cloakroom.png" alt="衣帽间" class="cloakroomImg" id="cloakroomImg">
-            <img src="./image/cloakroomBtn.png" alt="点击进入衣帽间" class="cloakroomBtn">
-            <img src="./image/cloakroomWord.png" alt="衣帽间" class="cloakroomWord">
-            <img src="./image/cloakroomTips.png" alt="衣帽间提示" class="cloakroomTips">
-            <a href="Cloakroom.html" id="cloakroomLink"></a>
-            <img src="./image/leftClickBtn.png" alt="上一页发型店" id="left3" class="left3" onclick="lto3()">
-        </div>
-
-        <script type="text/javascript">
-            window.addEventListener('load',function(){
-                var ymjimg = document.getElementById('cloakroomImg');//获取图片元素
-                var ymjbox = cloakroomImg.parentNode;//获取盒子元素
-                var ymjWidth = cloakroomImg.width;//获取图片宽度
-                ymjbox.style.width=ymjWidth+'px';
-            });
-        </script>
-
-        <script type="text/javascript">
-            function lto3() {
-                var hairShopBox = document.querySelector(".hairShopBox");
-                var cloakroomBox = document.querySelector(".cloakroomBox");
-                if (cloakroomBox.style.opacity == "1") {
-                    hairShopBox.style.opacity = "1";
-                    cloakroomBox.style.opacity = "0";
-                    hairShopBox.style.zIndex = "10";
-                    cloakroomBox.style.zIndex = "-1";
-                } else {
-                    hairShopBox.style.opacity = "0";
-                    cloakroomBox.style.opacity = "1";
-                    hairShopBox.style.zIndex = "-1";
-                    cloakroomBox.style.zIndex = "10";
-                }
-            }
-        </script>
     </div>
-    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const people = localStorage.getItem("person");
+            $(".person").html(people);
+        });
+
+        var isDragging = false;
+        var startX = 0;
+        var scrollLeft = 0;
+
+        function startDragging(event) {
+            isDragging = true;
+            startX = getClientX(event);
+            scrollLeft = document.getElementById('scrollable-div').scrollLeft;
+            document.getElementById('scrollable-div').style.cursor = 'grabbing';
+            event.preventDefault(); 
+        }
+
+        function stopDragging() {
+            isDragging = false;
+            document.getElementById('scrollable-div').style.cursor = 'grab';
+        }
+
+        function drag(event) {
+            if (!isDragging) return;
+            var scrollableDiv = document.getElementById('scrollable-div');
+            var scrollX = getClientX(event) - startX;
+            scrollableDiv.scrollLeft = scrollLeft - scrollX;
+        }
+
+        function getClientX(event) {
+            if (event.touches && event.touches.length > 0) {
+                return event.touches[0].clientX; 
+            }
+            return event.clientX;
+        }
+
+        const loading = {
+            container: document.querySelector(".loading"),
+            in: function(target) {
+                this.container.classList.remove("loading_out");
+                setTimeout(() => {
+                    window.location.href = target;
+                }, 1000); // 等待1秒后执行页面跳转
+            },
+            out: function() {
+                this.container.classList.add("loading_out");
+                setTimeout(() => {
+                    this.container.style.display = 'none'; // 隐藏 loading div
+                }, 1000); // 等待1秒后隐藏 loading
+            }
+        };
+
+        document.querySelector('.tip1').addEventListener('touchstart', function(event) {
+            event.preventDefault(); // 阻止默认事件
+            loading.out();
+            setTimeout(() => {
+                loading.in('Clothing stores.html');
+            }, 1000); // 等待1秒后执行页面跳转
+        });
+
+        document.querySelector('.tip2').addEventListener('touchstart', function() {
+            loading.out();
+            setTimeout(() => {
+                loading.in('Hair.html');
+            }, 1000); // 等待1秒后执行页面跳转
+        });
+
+        document.querySelector('.tip3').addEventListener('touchstart', function() {
+            loading.out();
+            setTimeout(() => {
+                loading.in('Jewelry stores.html');
+            }, 1000); // 等待1秒后执行页面跳转
+        });
+
+        document.querySelector('.tip4').addEventListener('touchstart', function() {
+            loading.out();
+            setTimeout(() => {
+                loading.in('Cloakroom.html');
+            }, 1000); // 等待1秒后执行页面跳转
+        });
+
+        document.querySelector('.tip1').addEventListener('click', function(event) {
+            event.preventDefault(); // 阻止默认事件
+            loading.out();
+            setTimeout(() => {
+                loading.in('Clothing stores.html');
+            }, 1000); // 等待1秒后执行页面跳转
+        });
+
+        document.querySelector('.tip2').addEventListener('click', function() {
+            loading.out();
+            setTimeout(() => {
+                loading.in('Hair.html');
+            }, 1000); // 等待1秒后执行页面跳转
+        });
+
+        document.querySelector('.tip3').addEventListener('click', function() {
+            loading.out();
+            setTimeout(() => {
+                loading.in('Jewelry stores.html');
+            }, 1000); // 等待1秒后执行页面跳转
+        });
+
+        document.querySelector('.tip4').addEventListener('click', function() {
+            loading.out();
+            setTimeout(() => {
+                loading.in('Cloakroom.html');
+            }, 1000); // 等待1秒后执行页面跳转
+        });
+
+        window.addEventListener("load", () => {
+            loading.out();
+        });
+    </script>
 </body>
 </html>

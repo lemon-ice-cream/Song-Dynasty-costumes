@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
     <title>宋韵卿裳——发型店</title>
     <style>
         html,body {
@@ -10,6 +12,23 @@
             height: 100%;
             margin: 0;
             padding: 0;
+        }
+
+        .loading{
+            position: fixed;
+            top: 0;
+            left:0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 3s ease;
+        }
+
+        .loading_out {
+            opacity: 0;
+            transition: opacity 3s ease;
         }
         
         .container {
@@ -237,11 +256,13 @@
     </style>
 </head>
 <body>
+    <div class="loading"></div>
     <div class="container">
         <div class="bg">
             <img class="bgimg" src="./material/Hair/hair bg.jpg">
             <img class="title" src="./material/Hair/hair title.png">
-            <img class="back" onclick="back()" src="./material/back.png">
+            <img class="back" src="./material/back.png">
+            
 
             <div class="person">
                 <img id="head" src="./material/startHair.png">
@@ -371,11 +392,34 @@
             }
         });
 
-        function back(){
-            var divContent = $(".person").html();
-            localStorage.setItem('person',divContent);
-            window.location.href="main.html";
-        }
+        const loading = {
+            container: document.querySelector(".loading"),
+            in: function(target) {
+                this.container.classList.remove("loading_out");
+                setTimeout(() => {
+                    window.location.href = target;
+                }, 1000); // 等待1秒后执行页面跳转
+            },
+            out: function() {
+                this.container.classList.add("loading_out");
+                setTimeout(() => {
+                    this.container.style.display = 'none'; // 隐藏 loading div
+                }, 1000); // 等待1秒后隐藏 loading
+            }
+        };
+
+        document.querySelector('.back').addEventListener('click', function() {
+            var divContent = document.querySelector(".person").innerHTML;
+            localStorage.setItem('person', divContent);
+            loading.out();
+            setTimeout(() => {
+                loading.in('main.html');
+            }, 1000); // 等待1秒后执行页面跳转
+        });
+
+        window.addEventListener("load", () => {
+            loading.out();
+        });
     </script>
 </body>
 </html>

@@ -3,6 +3,9 @@
     <head>
         <title>宋韵卿裳</title>
         <meta charset="utf-8"/>
+		<meta name="x5-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
 		<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.0/html2canvas.min.js"></script>
 		<script type="text/javascript">
@@ -69,10 +72,59 @@
 			function down_button(){
 				document.getElementById("button").style.width = "100%";
 			}
-			
-			function next(){
-				window.location.href="./main.html";
-			}
+
+			document.addEventListener('DOMContentLoaded', function () {
+				const loading = {
+					container: document.querySelector(".loading"),
+					in:function(target) {
+						this.container.classList.remove("loading_out");
+						setTimeout(() => {
+							window.location.href = target;
+						}, 1000)
+					},
+					out:function() {
+						this.container.classList.add("loading_out");
+					}
+				};
+
+				document.querySelector('#enter').addEventListener('click', function() {
+					localStorage.setItem('playMusic', 'true');
+					loading.in('main.html');
+				});
+
+				window.addEventListener("load", () => {
+					loading.out();
+				});
+			});
+
+			window.addEventListener('DOMContentLoaded', function () {
+				let audio = document.getElementById('myAudio');
+				let musicImg = document.getElementById('music');
+
+				if (audio) {
+					// 页面加载成功后自动播放音乐
+					audio.play();
+
+					function play() {
+						if (!audio.paused) {
+							audio.pause();
+							musicImg.src = './material/music0.png';
+						} else {
+							audio.play();
+							musicImg.src = './material/music.png';
+						}
+					}
+
+					// 点击音乐图标控制音乐播放/暂停
+					musicImg.addEventListener('click', play);
+				}
+
+				// 如果 URL 中包含参数 playMusic=true，则播放音乐
+				const urlParams = new URLSearchParams(window.location.search);
+				if (urlParams.has('playMusic') && urlParams.get('playMusic') === 'true') {
+					playMusic();
+				}
+			});
 
 		</script>
     </head>
@@ -91,6 +143,8 @@
 				    <img id="ershi" src="./material/cloakroom/Jewelry/Ershi/ershi0.png">
 				    <img id="pibo" src="./material/cloakroom/Pibo/pibo0.png">
 				</div>
+				<audio id="myAudio" src="./material/music.mp3" autoplay="autoplay" loop="loop" preload="auto"></audio>
+				<img id="music" src="./material/music.png"/>
 				<img class="bgimg" src="./image/first/bg.jpg"/>
 				<img id="clock" src="./image/first/clock.png"/>
 				<img id="text1" src="./image/first/title.png"/>
@@ -107,7 +161,7 @@
 				<div id="num_div"></div>
 				<div id="text_div"></div>
 				<div id="name_div"></div>
-				<img id="enter" src="./image/first/enter.png" onclick="next()"/>
+				<img id="enter" src="./image/first/enter.png"/>
 				<input type="text" id="input_name" name="use_name" placeholder="输入姓名"/>
 				<div id="button"  onclick="enter()">确定</div>
 			</div>
@@ -217,6 +271,15 @@
 			width:fit-content;
 			overflow: hidden;
 		}
+
+		#music{
+			position: absolute;
+			width: 10%;
+			right: 1%;
+			top: 1%;
+			z-index: 10;
+		}
+
 		.bgimg{
 			width:100%;
 			height:100%;
