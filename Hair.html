@@ -222,7 +222,7 @@
             text-align: left;
             width: 35%;
             top:25%;
-            right:11.5%;
+            right:12%;
             display: block;
         }
 
@@ -363,6 +363,15 @@
                 }
             }
         }
+
+        // 使用 touchstart 事件处理移动端点击
+        const hairImages = document.querySelectorAll('.hair');
+        hairImages.forEach(image => {
+            image.addEventListener('touchstart', function(event) {
+                event.preventDefault(); // 阻止默认事件
+                change(this);
+            });
+        });
 
         // 为 XMLHttpRequest 对象的 readyStateChange 事件添加一个回调函数
         text.onreadystatechange = function(){

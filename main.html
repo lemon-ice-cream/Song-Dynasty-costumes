@@ -136,6 +136,25 @@
             return event.clientX;
         }
 
+        // 存储滚动位置到 localStorage
+        function storeScrollPosition() {
+            var scrollLeft = document.getElementById('scrollable-div').scrollLeft;
+            localStorage.setItem('scrollPosition', scrollLeft);
+        }
+
+        // 恢复滚动位置
+        window.onload = function() {
+            var savedScrollPosition = localStorage.getItem('scrollPosition');
+            if (savedScrollPosition) {
+                document.getElementById('scrollable-div').scrollLeft = savedScrollPosition;
+            }
+        };
+
+        // 在离开页面时存储滚动位置
+        window.onbeforeunload = function() {
+            storeScrollPosition();
+        };
+
         const loading = {
             container: document.querySelector(".loading"),
             in: function(target) {

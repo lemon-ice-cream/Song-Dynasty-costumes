@@ -580,6 +580,33 @@
             }
         }
 
+        // 使用 touchstart 事件处理移动端点击
+        const guanshiImages = document.querySelectorAll('.guanshi');
+        guanshiImages.forEach(image => {
+            image.addEventListener('touchstart', function(event) {
+                event.preventDefault(); // 阻止默认事件
+                guanshi(this);
+            });
+        });
+
+        // 使用 touchstart 事件处理移动端点击
+        const fazanImages = document.querySelectorAll('.fazan');
+        fazanImages.forEach(image => {
+            image.addEventListener('touchstart', function(event) {
+                event.preventDefault(); // 阻止默认事件
+                fazan(this);
+            });
+        });
+
+        // 使用 touchstart 事件处理移动端点击
+        const ershiImages = document.querySelectorAll('.ershi');
+        ershiImages.forEach(image => {
+            image.addEventListener('touchstart', function(event) {
+                event.preventDefault(); // 阻止默认事件
+                ershi(this);
+            });
+        });
+
         const background = document.getElementById('background');
         const headline = document.getElementById('headline');
         const text1 = document.getElementById('text1');

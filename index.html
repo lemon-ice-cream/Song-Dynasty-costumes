@@ -3,8 +3,9 @@
     <head>
         <title>宋韵卿裳</title>
         <meta charset="utf-8"/>
-		<meta name="x5-fullscreen" content="true">
+		<!-- <meta name="x5-fullscreen" content="true"> -->
 		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
 
 		<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.0/html2canvas.min.js"></script>
@@ -73,29 +74,9 @@
 				document.getElementById("button").style.width = "100%";
 			}
 
-			document.addEventListener('DOMContentLoaded', function () {
-				const loading = {
-					container: document.querySelector(".loading"),
-					in:function(target) {
-						this.container.classList.remove("loading_out");
-						setTimeout(() => {
-							window.location.href = target;
-						}, 1000)
-					},
-					out:function() {
-						this.container.classList.add("loading_out");
-					}
-				};
-
-				document.querySelector('#enter').addEventListener('click', function() {
-					localStorage.setItem('playMusic', 'true');
-					loading.in('main.html');
-				});
-
-				window.addEventListener("load", () => {
-					loading.out();
-				});
-			});
+			function next(){
+				window.location.href="./main.html";
+			}
 
 			window.addEventListener('DOMContentLoaded', function () {
 				let audio = document.getElementById('myAudio');
@@ -154,14 +135,14 @@
 				<img id="item2" src="./image/first/item2.png"/>
 				<img id="end" src="./image/first/end.png"/>
 				<div id="circle">
-				<svg width="100%" height="100%">
-					<circle id="cir" cx="50%" cy="42.5%" r="15vh"></circle>
-				</svg>
+					<svg width="100%" height="100%">
+						<circle id="cir" cx="50%" cy="42.5%" r="15vh"></circle>
+					</svg>
 				</div>
 				<div id="num_div"></div>
 				<div id="text_div"></div>
 				<div id="name_div"></div>
-				<img id="enter" src="./image/first/enter.png"/>
+				<img id="enter" src="./image/first/enter.png" onclick="next()"/>
 				<input type="text" id="input_name" name="use_name" placeholder="输入姓名"/>
 				<div id="button"  onclick="enter()">确定</div>
 			</div>
@@ -267,6 +248,7 @@
 		}
 		#bg{
 			position:relative;
+			left:-15%;
 			margin:auto;
 			width:fit-content;
 			overflow: hidden;
@@ -296,7 +278,7 @@
 		#circle{
 			position: absolute;
 			width:80%;
-			height:100vh;
+			height:100%;
 			top:0;
 			left:10%;
 			transform: rotate(-90deg);

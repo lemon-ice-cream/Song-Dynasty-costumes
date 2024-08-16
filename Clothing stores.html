@@ -315,10 +315,15 @@
             text-align: left;
             width: 73%;
             top:33%;
-            transform: translateX(21%);
-            /* right:14%; */
+            right:14%;
             display: block;
         }
+
+        @media only screen and (max-width: 600px) {
+        .text1 {
+            font-size: 60%;
+        }
+    }
 
         @keyframes turn {
             0%{
@@ -574,6 +579,47 @@
                 }
             }
         }
+
+        // 使用 touchstart 事件处理移动端点击
+        const ruyiImages = document.querySelectorAll('.ruyi');
+        ruyiImages.forEach(image => {
+            image.addEventListener('touchstart', function(event) {
+                event.preventDefault(); // 阻止默认事件
+                ruyi(this);
+            });
+        });
+
+        const beiziImages = document.querySelectorAll('.beizi');
+        beiziImages.forEach(image => {
+            image.addEventListener('touchstart', function(event) {
+                event.preventDefault(); // 阻止默认事件
+                beizi(this);
+            });
+        });
+
+        const qunziImages = document.querySelectorAll('.qunzi');
+        qunziImages.forEach(image => {
+            image.addEventListener('touchstart', function(event) {
+                event.preventDefault(); // 阻止默认事件
+                qunzi(this);
+            });
+        });
+
+        const moxiongImages = document.querySelectorAll('.moxiong');
+        moxiongImages.forEach(image => {
+            image.addEventListener('touchstart', function(event) {
+                event.preventDefault(); // 阻止默认事件
+                moxiong(this);
+            });
+        });
+
+        const piboImages = document.querySelectorAll('.pibo');
+        piboImages.forEach(image => {
+            image.addEventListener('touchstart', function(event) {
+                event.preventDefault(); // 阻止默认事件
+                pibo(this);
+            });
+        });
 
         const background = document.getElementById('background');
         const headline = document.getElementById('headline');
