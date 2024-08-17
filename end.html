@@ -310,17 +310,17 @@
             }
 
             if (localStorage.getItem('musicPlaying') === 'true') {
-                // 获取上次播放的时间
                 let savedTime = localStorage.getItem('musicTime');
                 if (savedTime) {
                     audio.currentTime = parseFloat(savedTime);
                 }
-
-                // 页面加载成功后自动播放音乐
                 audio.play().catch(function(error) {
                     console.error('自动播放被浏览器拦截:', error);
                 });
                 musicImg.src = './material/music.png';
+            } else {
+                audio.pause(); // 如果在首页面未播放，则暂停音乐
+                musicImg.src = './material/music0.png';
             }
 
             // 保存播放时间

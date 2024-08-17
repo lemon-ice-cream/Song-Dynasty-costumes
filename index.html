@@ -79,6 +79,7 @@
 			}
 
 			document.addEventListener('DOMContentLoaded', function () {
+				localStorage.setItem('musicPlaying', 'false');
 				let audio = document.getElementById('myAudio');
 				let musicImg = document.getElementById('music');
 
@@ -92,13 +93,6 @@
 						musicImg.src = './material/music0.png';
 						localStorage.setItem('musicPlaying', 'false');
 					}
-				}
-
-				if (localStorage.getItem('musicPlaying') === 'true') {
-					// 页面加载成功后自动播放音乐
-					audio.play().catch(function(error) {
-						console.error('自动播放被浏览器拦截:', error);
-					});
 				}
 
 				// 保存播放时间
