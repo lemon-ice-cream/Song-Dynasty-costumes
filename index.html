@@ -78,33 +78,36 @@
 				window.location.href="./main.html";
 			}
 
-			window.addEventListener('DOMContentLoaded', function () {
+			document.addEventListener('DOMContentLoaded', function () {
 				let audio = document.getElementById('myAudio');
 				let musicImg = document.getElementById('music');
 
-				if (audio) {
-					// 页面加载成功后自动播放音乐
-					audio.play();
-
-					function play() {
-						if (!audio.paused) {
-							audio.pause();
-							musicImg.src = './material/music0.png';
-						} else {
-							audio.play();
-							musicImg.src = './material/music.png';
-						}
+				function playMusic() {
+					if (audio.paused) {
+						audio.play();
+						musicImg.src = './material/music.png';
+						localStorage.setItem('musicPlaying', 'true');
+					} else {
+						audio.pause();
+						musicImg.src = './material/music0.png';
+						localStorage.setItem('musicPlaying', 'false');
 					}
-
-					// 点击音乐图标控制音乐播放/暂停
-					musicImg.addEventListener('click', play);
 				}
 
-				// 如果 URL 中包含参数 playMusic=true，则播放音乐
-				const urlParams = new URLSearchParams(window.location.search);
-				if (urlParams.has('playMusic') && urlParams.get('playMusic') === 'true') {
-					playMusic();
+				if (localStorage.getItem('musicPlaying') === 'true') {
+					// 页面加载成功后自动播放音乐
+					audio.play().catch(function(error) {
+						console.error('自动播放被浏览器拦截:', error);
+					});
 				}
+
+				// 保存播放时间
+				audio.addEventListener('timeupdate', function() {
+					localStorage.setItem('musicTime', audio.currentTime.toString());
+				});
+
+				// 点击音乐图标控制音乐播放/暂停
+				musicImg.addEventListener('click', playMusic);
 			});
 
 		</script>
@@ -125,7 +128,7 @@
 				    <img id="pibo" src="./material/cloakroom/Pibo/pibo0.png">
 				</div>
 				<audio id="myAudio" src="./material/music.mp3" autoplay="autoplay" loop="loop" preload="auto"></audio>
-				<img id="music" src="./material/music.png"/>
+				<img id="music" src="./material/music0.png"/>
 				<img class="bgimg" src="./image/first/bg.jpg"/>
 				<img id="clock" src="./image/first/clock.png"/>
 				<img id="text1" src="./image/first/title.png"/>
@@ -248,7 +251,6 @@
 		}
 		#bg{
 			position:relative;
-			left:-15%;
 			margin:auto;
 			width:fit-content;
 			overflow: hidden;
@@ -260,6 +262,7 @@
 			right: 1%;
 			top: 1%;
 			z-index: 10;
+			cursor: pointer;
 		}
 
 		.bgimg{

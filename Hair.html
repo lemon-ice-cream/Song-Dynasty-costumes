@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="x5-fullscreen" content="true">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-
     <title>宋韵卿裳——发型店</title>
     <style>
         html,body {
@@ -65,7 +64,17 @@
             left:0;
             top:3%;
             z-index: 6;
+            cursor: pointer;
         }
+
+        #music{
+			position: absolute;
+			width: 10%;
+			right: 1%;
+			top: 1%;
+			z-index: 10;
+			cursor: pointer;
+		}
 
         .title{
             position: absolute;
@@ -197,6 +206,13 @@
             transition: left 0.3s ease-out;
         }
 
+        #hint{
+            position: absolute;
+            z-index: 5;
+            bottom: -1%;
+            color: #eaf1d8;
+        }
+
         #introduce{
             position: absolute;
             height: 45%;
@@ -262,7 +278,8 @@
             <img class="bgimg" src="./material/Hair/hair bg.jpg">
             <img class="title" src="./material/Hair/hair title.png">
             <img class="back" src="./material/back.png">
-            
+            <audio id="myAudio" src="./material/music.mp3" autoplay="autoplay" loop="loop" preload="auto"></audio>
+            <img id="music" src="./material/music0.png"/>
 
             <div class="person">
                 <img id="head" src="./material/startHair.png">
@@ -287,8 +304,9 @@
                     <img class="hair" onclick="change(this)" src="./material/cloakroom/Hairstyle/PanLongJi.png">
                 </div>
             </div>
+            <p id="hint">点击介绍页空白处翻转，左右拖动换装</p>
 
-            <img id="introduce" src="./material/introduce.png">
+            <img id="introduce" class="pulse" src="./material/introduce.png">
             <div class="text" id="headline">双丫髻</div>
             <div class="text" id="text1">&emsp;&emsp;古代少女发髯名。宋代少女一般以梳双髻为多，双丫髻是双挂式中最常见之发式，其梳编法是将发平分两侧，再梳结成髻，置于头顶两侧。前额外负担多饰有垂发，俗称刘海。即在头上或在额旁梳成两个小鬟。宋代黄庭坚有：“学绾双鬟年纪小”和“云鬟垂两耳”诗句。</div>
             <div id="oppsite">
@@ -302,6 +320,45 @@
         $(document).ready(function() {
             const people = localStorage.getItem("person");
             $(".person").html(people);
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let audio = document.getElementById('myAudio');
+            let musicImg = document.getElementById('music');
+
+            function playMusic() {
+                if (audio.paused) {
+                    audio.play();
+                    musicImg.src = './material/music.png';
+                    localStorage.setItem('musicPlaying', 'true');
+                } else {
+                    audio.pause();
+                    musicImg.src = './material/music0.png';
+                    localStorage.setItem('musicPlaying', 'false');
+                }
+            }
+
+            if (localStorage.getItem('musicPlaying') === 'true') {
+                // 获取上次播放的时间
+                let savedTime = localStorage.getItem('musicTime');
+                if (savedTime) {
+                    audio.currentTime = parseFloat(savedTime);
+                }
+
+                // 页面加载成功后自动播放音乐
+                audio.play().catch(function(error) {
+                    console.error('自动播放被浏览器拦截:', error);
+                });
+                musicImg.src = './material/music.png';
+            }
+
+            // 保存播放时间
+            audio.addEventListener('timeupdate', function() {
+                localStorage.setItem('musicTime', audio.currentTime.toString());
+            });
+
+            // 点击音乐图标控制音乐播放/暂停
+            musicImg.addEventListener('click', playMusic);
         });
 
         var isDragging = false;

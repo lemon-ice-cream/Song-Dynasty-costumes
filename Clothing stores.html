@@ -64,7 +64,17 @@
             width: 15%;
             left:0;
             top:3%;
+            cursor: pointer;
         }
+
+        #music{
+			position: absolute;
+			width: 10%;
+			right: 1%;
+			top: 1%;
+			z-index: 10;
+			cursor: pointer;
+		}
 
         .title{
             position: absolute;
@@ -284,6 +294,13 @@
             transition: left 0.3s ease-out;
         }
 
+        #hint{
+            position: absolute;
+            z-index: 5;
+            bottom: -1%;
+            color: #eaf1d8;
+        }
+
         #introduce{
             position: absolute;
             width: 45%;
@@ -318,12 +335,6 @@
             right:14%;
             display: block;
         }
-
-        @media only screen and (max-width: 600px) {
-        .text1 {
-            font-size: 60%;
-        }
-    }
 
         @keyframes turn {
             0%{
@@ -361,6 +372,8 @@
             <img class="bgimg" src="./material/Clothing stores/Clothing stores bg.jpg">
             <img class="title" src="./material/Clothing stores/Clothing stores title.png">
             <img class="back" src="./material/back.png">
+            <audio id="myAudio" src="./material/music.mp3" autoplay="autoplay" loop="loop" preload="auto"></audio>
+            <img id="music" src="./material/music0.png"/>
 
             <div class="person">
                 <img id="head" src="./material/startHair.png">
@@ -427,6 +440,7 @@
                 </div>
             </div>
 
+            <p id="hint">点击介绍页空白处翻转，左右拖动换装</p>
             <div id="introduce">
                 <img id="background" src="./material/introduce.png">
                 <p class="text" id="headline">襦衣</p>
@@ -443,6 +457,45 @@
         $(document).ready(function() {
             const people = localStorage.getItem("person");
             $(".person").html(people);
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let audio = document.getElementById('myAudio');
+            let musicImg = document.getElementById('music');
+
+            function playMusic() {
+                if (audio.paused) {
+                    audio.play();
+                    musicImg.src = './material/music.png';
+                    localStorage.setItem('musicPlaying', 'true');
+                } else {
+                    audio.pause();
+                    musicImg.src = './material/music0.png';
+                    localStorage.setItem('musicPlaying', 'false');
+                }
+            }
+
+            if (localStorage.getItem('musicPlaying') === 'true') {
+                // 获取上次播放的时间
+                let savedTime = localStorage.getItem('musicTime');
+                if (savedTime) {
+                    audio.currentTime = parseFloat(savedTime);
+                }
+
+                // 页面加载成功后自动播放音乐
+                audio.play().catch(function(error) {
+                    console.error('自动播放被浏览器拦截:', error);
+                });
+                musicImg.src = './material/music.png';
+            }
+
+            // 保存播放时间
+            audio.addEventListener('timeupdate', function() {
+                localStorage.setItem('musicTime', audio.currentTime.toString());
+            });
+
+            // 点击音乐图标控制音乐播放/暂停
+            musicImg.addEventListener('click', playMusic);
         });
 
         var buttonElement = document.getElementsByClassName("button");

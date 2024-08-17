@@ -40,6 +40,15 @@
             height: 100vh;
 		}
 
+        #music{
+			position: absolute;
+			width: 10%;
+			right: 1%;
+			top: 1%;
+			z-index: 10;
+			cursor: pointer;
+		}
+
         .tip{
             position: absolute;
             width: 40%;
@@ -111,6 +120,7 @@
         #moxiong{
             position: absolute;
             height: 100%;
+            top:1%;
             z-index: 2;
         }
 
@@ -275,13 +285,52 @@
 		}
 		
 		function save(){
-			const people = localStorage.getItem('people');
+			const people = localStorage.getItem('person');
 			$("#end_person").html(people);
 			$("#cover_people").html(people);
 			$("#cover_people #pibo").attr("id","pibo_cover");
 			const id = localStorage.getItem('name');
 			$("#name_text_save").html(id);
 		}
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let audio = document.getElementById('myAudio');
+            let musicImg = document.getElementById('music');
+
+            function playMusic() {
+                if (audio.paused) {
+                    audio.play();
+                    musicImg.src = './material/music.png';
+                    localStorage.setItem('musicPlaying', 'true');
+                } else {
+                    audio.pause();
+                    musicImg.src = './material/music0.png';
+                    localStorage.setItem('musicPlaying', 'false');
+                }
+            }
+
+            if (localStorage.getItem('musicPlaying') === 'true') {
+                // 获取上次播放的时间
+                let savedTime = localStorage.getItem('musicTime');
+                if (savedTime) {
+                    audio.currentTime = parseFloat(savedTime);
+                }
+
+                // 页面加载成功后自动播放音乐
+                audio.play().catch(function(error) {
+                    console.error('自动播放被浏览器拦截:', error);
+                });
+                musicImg.src = './material/music.png';
+            }
+
+            // 保存播放时间
+            audio.addEventListener('timeupdate', function() {
+                localStorage.setItem('musicTime', audio.currentTime.toString());
+            });
+
+            // 点击音乐图标控制音乐播放/暂停
+            musicImg.addEventListener('click', playMusic);
+        });
 	</script>
 </head>
 <body onload="save()">
@@ -293,6 +342,8 @@
 			<div id="text_save">恭喜你，生成了你的宋韵专属人物形象</div>
             <img class="save" onclick="takeScreenshot()" src="./material/End/button save.png">
             <img class="again" onclick="again_game()" src="./material/End/button again.png" />
+            <audio id="myAudio" src="./material/music.mp3" autoplay="autoplay" loop="loop" preload="auto"></audio>
+            <img id="music" src="./material/music0.png"/>
 
             <div id="end_person">
                 <img id="head" src="./material/cloakroom/hairstyle/hair0.png">
